@@ -6,15 +6,20 @@ type ModalProps = {
   onClose: () => void;
   title: string;
   children: ReactNode;
+  size?: "sm" | "md" | "large";
 };
 
 type ModalFooterProps = {
   children: ReactNode;
-}
+};
 
-
-
-const Modal: React.FC<ModalProps> & { footer: React.FC<ModalFooterProps> }= ({ isOpen, onClose, title, children }) => {
+const Modal: React.FC<ModalProps> & { footer: React.FC<ModalFooterProps> } = ({
+  isOpen,
+  onClose,
+  title,
+  children,
+  size,
+}) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -45,7 +50,16 @@ const Modal: React.FC<ModalProps> & { footer: React.FC<ModalFooterProps> }= ({ i
   }, [isOpen, onClose]);
 
   if (!isOpen) return null;
+  const modalSize = () => {
 
+    switch (size) {
+      case 'sm':
+        return 'xl:w-2/5'
+      default:
+        return 'xl:w-2/4'
+    }
+    
+  };
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50">
       <div className="modal-overlay bg-black opacity-50 fixed inset-0"></div>
@@ -53,7 +67,7 @@ const Modal: React.FC<ModalProps> & { footer: React.FC<ModalFooterProps> }= ({ i
         ref={modalRef}
         className={`modal bg-white rounded-md p-4 relative w-full max-w-md mx-auto ${
           isOpen
-            ? "sm:max-w-full xs:h-screen md:h-auto md:w-4/5 lg:w-3/5 xl:w-2/4"
+            ? `sm:max-w-full xs:h-screen md:h-auto md:w-4/5 lg:w-3/5  ${modalSize()}`
             : ""
         }`}
       >
@@ -69,9 +83,7 @@ const Modal: React.FC<ModalProps> & { footer: React.FC<ModalFooterProps> }= ({ i
           </div>
         </div>
         <div className="modal-body">{children}</div>
-        <Modal.footer>
-          {/* Conteúdo do rodapé do modal */}
-        </Modal.footer>
+        <Modal.footer>{/* Conteúdo do rodapé do modal */}</Modal.footer>
       </div>
     </div>
   );
@@ -80,6 +92,5 @@ const Modal: React.FC<ModalProps> & { footer: React.FC<ModalFooterProps> }= ({ i
 Modal.footer = ({ children }) => {
   return <div className="modal-footer">{children}</div>;
 };
-
 
 export default Modal;

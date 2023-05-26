@@ -1,0 +1,41 @@
+{
+  "title": "ola mundo!",
+  "navBar": {
+    "advertiseYourSpace": "Anuncie seu espaço",
+    "logIn": "Entrar",
+    "signUp": "Cadastrar",
+    "dropDown": {
+      "portuguese": "Português",
+      "english": "Inglês",
+      "spanish": "Espanhol"
+    }
+  },
+  "search": {
+    "whatAreYouPlanning": "O que você está planejando",
+    "subTitle": "Produção • Gravação • Evento",
+    "modal": {
+      "title": "Busca",
+      "whatAreYouPlanning": "O que você está planejando?",
+      "where": "Onde?",
+      "when": "Quando?",
+      "howManyPeople": "Quantas Pessoas?",
+      "clear": "Limpar Tudo",
+      "search": "Buscar"
+    }
+  },
+  "filter": {
+    "modal": {
+      "title": "Filtro",
+      "priceRange":"Faixa de Preço",
+      "priceRangeDescription":"O preço médio de locação é {value}, não incluindo as taxas ou os impostos.",
+      "keyword": "Palavra-chave",
+      "minimumHours": "Mínimo de horas",
+      "clear": "Limpar Tudo",
+      "show": "Mostrar {value} cenarios"
+    }
+  },
+  "banner": {
+    "message": "Encontre o lugar ideal para dar vida às suas ideias",
+    "button": "Explorar"
+  }
+}

@@ -1,6 +1,6 @@
 "use client";
 import { TbCalculator, TbCertificate2, TbInfinity } from "react-icons/tb";
-import Card from "./card";
+import Card from "../atoms/Card";
 
 const About = () => {
   return (

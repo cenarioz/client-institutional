@@ -1,0 +1,41 @@
+{
+  "title": "Hello world!",
+  "navBar": {
+    "advertiseYourSpace": "Advertise your space",
+    "logIn": "Log In",
+    "signUp": "Sign Up",
+    "dropDown": {
+      "portuguese": "Portuguese",
+      "english": "English",
+      "spanish": "Spanish"
+    }
+  },
+  "search": {
+    "whatAreYouPlanning": "What are you planning",
+    "subTitle": "Production • Recording • Event",
+    "modal": {
+      "title": "Search",
+      "whatAreYouPlanning": "What are you planning?",
+      "where": "Where?",
+      "when": "When?",
+      "howManyPeople": "How many people?",
+      "clear": "Clear All",
+      "search": "Search"
+    }
+  },
+  "filter": {
+    "modal": {
+      "title": "Filter",
+      "priceRange":"Price Range",
+      "priceRangeDescription":"The average rental price is {value}, not including fees or taxes.",
+      "keyword": "Keyword",
+      "minimumHours": "Minimum hours",
+      "clear": "Clear All",
+      "show": "Show {value} scenarios"
+    }
+  },
+  "banner": {
+    "message": "Find the ideal place to bring your ideas to life",
+    "button": "Explore"
+  }
+}

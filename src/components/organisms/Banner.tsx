@@ -1,8 +1,10 @@
 "use client";
+import { useTranslations } from "next-intl";
 import { IoMap } from "react-icons/io5";
-import Search from "./search";
+import Search from "../molecules/Search";
 
 const Banner = () => {
+  const t = useTranslations();
   return (
     <>
       <div className="relative bg-cover bg-center bg-[url('https://images.pexels.com/photos/6883795/pexels-photo-6883795.jpeg')] pt-24 pb-20">
@@ -12,12 +14,11 @@ const Banner = () => {
           </div>
           <div className="container mx-auto px-4 pt-24">
             <p className="text-4xl w-80 font-bold text-white mb-4 pt-6 pb-6">
-              Encontre o lugar <strong>ideal</strong> para dar vida às suas
-              ideias
+              {t("banner.message")}
             </p>
 
             <button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-3 px-5 border rounded-full gap-2 shadow inline-flex items-center">
-              <span>Explorar</span>
+              <span> {t("banner.button")}</span>
               <IoMap />
             </button>
           </div>

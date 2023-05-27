@@ -1,8 +1,10 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 const OurWork = (props: any) => {
+  const t = useTranslations();
   const [selectedImage, setSelectedImage] = useState(
     "https://source.unsplash.com/featured/?studio,photography"
   );
@@ -66,9 +68,9 @@ const OurWork = (props: any) => {
   };
 
   return (
-    <section className="container mx-auto grid grid-cols-3 gap-4 py-12">
+    <section className="container mx-auto grid grid-cols-3 gap-4 py-12 xs:hidden">
       <div className="col-span-2 flex flex-col items-center">
-        <h1 className="text-4xl mb-12">Alguns de nossos trabalhos...</h1>
+        <h1 className="text-4xl mb-12">{t("ourWork.title")}</h1>
         <div className="flex justify-center flex-wrap gap-6 content-center px-20">
           <button
             onMouseEnter={() => (
@@ -81,7 +83,7 @@ const OurWork = (props: any) => {
               buttonActive1 ? "bg-black text-white" : "bg-white text-gray-800"
             }  font-semibold py-3 px-5 border rounded-full gap-2 shadow inline-flex items-center`}
           >
-            Estudio fotografico
+            {t("ourWork.button1")}
           </button>
           <button
             onMouseEnter={() => (
@@ -94,7 +96,7 @@ const OurWork = (props: any) => {
               buttonActive2 ? "bg-black text-white" : "bg-white text-gray-800"
             }  font-semibold py-3 px-5 border rounded-full gap-2 shadow inline-flex items-center`}
           >
-            Reuniao
+            {t("ourWork.button2")}
           </button>
           <button
             onMouseEnter={() => (
@@ -107,7 +109,7 @@ const OurWork = (props: any) => {
               buttonActive3 ? "bg-black text-white" : "bg-white text-gray-800"
             }  font-semibold py-3 px-5 border rounded-full gap-2 shadow inline-flex items-center`}
           >
-            Evento
+            {t("ourWork.button3")}
           </button>
           <button
             onMouseEnter={() => (
@@ -120,7 +122,7 @@ const OurWork = (props: any) => {
               buttonActive4 ? "bg-black text-white" : "bg-white text-gray-800"
             }  font-semibold py-3 px-5 border rounded-full gap-2 shadow inline-flex items-center`}
           >
-            Gravação de Video
+            {t("ourWork.button4")}
           </button>
           <button
             onMouseEnter={() => (
@@ -133,7 +135,7 @@ const OurWork = (props: any) => {
               buttonActive5 ? "bg-black text-white" : "bg-white text-gray-800"
             }  font-semibold py-3 px-5 border rounded-full gap-2 shadow inline-flex items-center`}
           >
-            Clipe musical
+            {t("ourWork.button5")}
           </button>
           <button
             onMouseEnter={() => (
@@ -146,7 +148,7 @@ const OurWork = (props: any) => {
               buttonActive6 ? "bg-black text-white" : "bg-white text-gray-800"
             }  font-semibold py-3 px-5 border rounded-full gap-2 shadow inline-flex items-center`}
           >
-            Filmagem
+            {t("ourWork.button6")}
           </button>
           <button
             onMouseEnter={() => (
@@ -159,7 +161,7 @@ const OurWork = (props: any) => {
               buttonActive7 ? "bg-black text-white" : "bg-white text-gray-800"
             }  font-semibold py-3 px-5 border rounded-full gap-2 shadow inline-flex items-center`}
           >
-            Sessão de fotos
+            {t("ourWork.button7")}
           </button>
           <button
             onMouseEnter={() => {
@@ -172,7 +174,7 @@ const OurWork = (props: any) => {
               buttonActive8 ? "bg-black text-white" : "bg-white text-gray-800"
             }  font-semibold py-3 px-5 border rounded-full gap-2 shadow inline-flex items-center`}
           >
-            Evento corporativo
+            {t("ourWork.button8")}
           </button>
           <button
             onMouseEnter={() => (
@@ -185,7 +187,7 @@ const OurWork = (props: any) => {
               buttonActive9 ? "bg-black text-white" : "bg-white text-gray-800"
             }  font-semibold py-3 px-5 border rounded-full gap-2 shadow inline-flex items-center`}
           >
-            Festa
+            {t("ourWork.button9")}
           </button>
         </div>
       </div>

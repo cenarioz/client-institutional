@@ -26,8 +26,8 @@
   "filter": {
     "modal": {
       "title": "Filtro",
-      "priceRange":"Faixa de Preço",
-      "priceRangeDescription":"O preço médio de locação é {value}, não incluindo as taxas ou os impostos.",
+      "priceRange": "Faixa de Preço",
+      "priceRangeDescription": "O preço médio de locação é {value}, não incluindo as taxas ou os impostos.",
       "keyword": "Palavra-chave",
       "minimumHours": "Mínimo de horas",
       "clear": "Limpar Tudo",
@@ -37,5 +37,38 @@
   "banner": {
     "message": "Encontre o lugar ideal para dar vida às suas ideias",
     "button": "Explorar"
+  },
+  "about": {
+    "title": "Por que escolher a Cenárioz",
+    "subTitle": "Precisa de um espaço para dar vida às suas ideias? Nós podemos ajudá-lo a encontrar o lugar ideal para alugar.",
+    "card1": {
+      "title": "Orçamento Fácil",
+      "subTitle": "Reserve seu cenário e pague por hora, sem taxas ocultas de horas extras."
+    },
+    "card2": {
+      "title": "Anfitriões experientes",
+      "subTitle": "Conecte-se com proprietários experientes para discutir estúdios, especificações técnicas e acomodações de talentos antes da chamada."
+    },
+    "card3": {
+      "title": "Infinitas possibilidades",
+      "subTitle": "Encontre tudo, desde estúdios equipados profissionalmente até quartos e residências não convencionais."
+    }
+  },
+  "ourWork": {
+    "title": "Alguns de nossos trabalhos...",
+    "button1": "Estudio fotografico",
+    "button2": "Reuniao",
+    "button3": "Evento",
+    "button4": "Gravação de Video",
+    "button5": "Clipe musical",
+    "button6": "Filmagem",
+    "button7": "Sessão de fotos",
+    "button8": "Evento corporativo",
+    "button9": "Festa"
+  },
+  "mission": {
+    "title": "Nossa Missão",
+    "session1": "A Cenarioz é uma plataforma online que conecta proprietários de imóveis com locatários que desejam filmar ou realizar eventos em seus espaços. A plataforma permite que os locatários pesquisem locais para filmagem, se comuniquem com os proprietários e paguem facilmente, tudo em um só lugar.",
+    "session2": "O principal objetivo da Cenarioz é fornecer aos locatários uma plataforma para encontrar e reservar facilmente locais únicos para filmagem e espaços para eventos de forma mais acessível. Além disso, a plataforma oferece aos proprietários de imóveis uma nova oportunidade de exibir suas propriedades e obter uma renda adicional."
   }
 }

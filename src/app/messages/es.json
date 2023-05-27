@@ -1,0 +1,74 @@
+{
+  "title": "¡Hola mundo!",
+  "navBar": {
+    "advertiseYourSpace": "Anunciar tu espacio",
+    "logIn": "Iniciar sesión",
+    "signUp": "Registrarse",
+    "dropDown": {
+      "portuguese": "Portugués",
+      "english": "Inglés",
+      "spanish": "Español"
+    }
+  },
+  "search": {
+    "whatAreYouPlanning": "¿Qué estás planeando?",
+    "subTitle": "Producción • Grabación • Evento",
+    "modal": {
+      "title": "Búsqueda",
+      "whatAreYouPlanning": "¿Qué estás planeando?",
+      "where": "¿Dónde?",
+      "when": "¿Cuándo?",
+      "howManyPeople": "¿Cuántas personas?",
+      "clear": "Limpiar todo",
+      "search": "Buscar"
+    }
+  },
+  "filter": {
+    "modal": {
+      "title": "Filtro",
+      "priceRange": "Rango de precios",
+      "priceRangeDescription": "El precio promedio de alquiler es {value}, sin incluir tasas o impuestos.",
+      "keyword": "Palabra clave",
+      "minimumHours": "Mínimo de horas",
+      "clear": "Limpiar todo",
+      "show": "Mostrar {value} escenarios"
+    }
+  },
+  "banner": {
+    "message": "Encuentra el lugar ideal para dar vida a tus ideas",
+    "button": "Explorar"
+  },
+  "about": {
+    "title": "¿Por qué elegir Cenárioz?",
+    "subTitle": "¿Necesitas un espacio para dar vida a tus ideas? Podemos ayudarte a encontrar el lugar perfecto para alquilar.",
+    "card1": {
+      "title": "Presupuesto Fácil",
+      "subTitle": "Reserva tu escenario y paga por hora, sin cargos ocultos por horas extra."
+    },
+    "card2": {
+      "title": "Anfitriones Experimentados",
+      "subTitle": "Conéctate con propietarios experimentados para discutir estudios, especificaciones técnicas y alojamientos para el talento antes de la sesión."
+    },
+    "card3": {
+      "title": "Infinitas Posibilidades",
+      "subTitle": "Encuentra desde estudios equipados profesionalmente hasta habitaciones y residencias no convencionales."
+    }
+  },
+  "ourWork": {
+    "title": "Algunos de Nuestros Trabajos...",
+    "button1": "Estudio Fotográfico",
+    "button2": "Reunión",
+    "button3": "Evento",
+    "button4": "Grabación de Video",
+    "button5": "Videoclip Musical",
+    "button6": "Filmación",
+    "button7": "Sesión de Fotos",
+    "button8": "Evento Corporativo",
+    "button9": "Fiesta"
+  },
+  "mission": {
+    "title": "Nuestra Misión",
+    "session1": "Cenárioz es una plataforma en línea que conecta a propietarios de propiedades con inquilinos que buscan filmar o realizar eventos en sus espacios. La plataforma permite a los inquilinos buscar ubicaciones para filmar, comunicarse con los propietarios y realizar pagos fácilmente, todo en un solo lugar.",
+    "session2": "El objetivo principal de Cenárioz es proporcionar a los inquilinos una plataforma para encontrar y reservar fácilmente lugares únicos para filmar y espacios para eventos de manera más accesible. Además, la plataforma brinda a los propietarios de propiedades una nueva oportunidad para mostrar sus propiedades y obtener ingresos adicionales."
+  }
+}

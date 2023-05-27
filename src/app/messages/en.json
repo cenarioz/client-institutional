@@ -2,8 +2,8 @@
   "title": "Hello world!",
   "navBar": {
     "advertiseYourSpace": "Advertise your space",
-    "logIn": "Log In",
-    "signUp": "Sign Up",
+    "logIn": "Log in",
+    "signUp": "Sign up",
     "dropDown": {
       "portuguese": "Portuguese",
       "english": "English",
@@ -11,7 +11,7 @@
     }
   },
   "search": {
-    "whatAreYouPlanning": "What are you planning",
+    "whatAreYouPlanning": "What are you planning?",
     "subTitle": "Production • Recording • Event",
     "modal": {
       "title": "Search",
@@ -26,8 +26,8 @@
   "filter": {
     "modal": {
       "title": "Filter",
-      "priceRange":"Price Range",
-      "priceRangeDescription":"The average rental price is {value}, not including fees or taxes.",
+      "priceRange": "Price Range",
+      "priceRangeDescription": "The average rental price is {value}, not including fees or taxes.",
       "keyword": "Keyword",
       "minimumHours": "Minimum hours",
       "clear": "Clear All",
@@ -35,7 +35,40 @@
     }
   },
   "banner": {
-    "message": "Find the ideal place to bring your ideas to life",
+    "message": "Find the perfect place to bring your ideas to life",
     "button": "Explore"
+  },
+  "about": {
+    "title": "Why Choose Cenárioz",
+    "subTitle": "Need a space to bring your ideas to life? We can help you find the perfect place to rent.",
+    "card1": {
+      "title": "Easy Budgeting",
+      "subTitle": "Book your set and pay per hour, with no hidden fees for overtime."
+    },
+    "card2": {
+      "title": "Experienced Hosts",
+      "subTitle": "Connect with experienced owners to discuss studios, technical specifications, and talent accommodations before the shoot."
+    },
+    "card3": {
+      "title": "Infinite Possibilities",
+      "subTitle": "Find everything from professionally equipped studios to unconventional rooms and residences."
+    }
+  },
+  "ourWork": {
+    "title": "Some of Our Work...",
+    "button1": "Photography Studio",
+    "button2": "Meeting",
+    "button3": "Event",
+    "button4": "Video Recording",
+    "button5": "Music Video",
+    "button6": "Filming",
+    "button7": "Photo Session",
+    "button8": "Corporate Event",
+    "button9": "Party"
+  },
+  "mission": {
+    "title": "Our Mission",
+    "session1": "Cenárioz is an online platform that connects property owners with renters looking to film or host events in their spaces. The platform allows renters to search for filming locations, communicate with owners, and easily make payments, all in one place.",
+    "session2": "The main goal of Cenárioz is to provide renters with a platform to easily find and book unique filming locations and event spaces in a more affordable way. Additionally, the platform offers property owners a new opportunity to showcase their properties and earn additional income."
   }
 }

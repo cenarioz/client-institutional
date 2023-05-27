@@ -4,7 +4,7 @@ import { ReactNode } from "react";
 import "../globals.css";
 
 export function generateStaticParams() {
-  return [{ locale: "en" }, { locale: "pt-BR" }];
+  return [{ locale: "en" }, { locale: "es" }, { locale: "pt-BR" }];
 }
 
 interface layoutProps {

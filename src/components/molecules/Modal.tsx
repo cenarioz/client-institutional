@@ -65,7 +65,7 @@ const Modal: React.FC<ModalProps> & { footer: React.FC<ModalFooterProps> } = ({
       <div className="modal-overlay bg-black opacity-50 fixed inset-0"></div>
       <div
         ref={modalRef}
-        className={`modal bg-white rounded-md p-4 relative w-full max-w-md mx-auto ${
+        className={`modal bg-white rounded-md p-4 xs:pt-12 relative w-full max-w-md mx-auto ${
           isOpen
             ? `sm:max-w-full xs:h-screen md:h-auto md:w-4/5 lg:w-3/5  ${modalSize()}`
             : ""
@@ -90,7 +90,7 @@ const Modal: React.FC<ModalProps> & { footer: React.FC<ModalFooterProps> } = ({
 };
 
 Modal.footer = ({ children }) => {
-  return <div className="modal-footer">{children}</div>;
+  return <div className="modal-footer xs:absolute xs:bottom-8 xs:right-0 xs:left-0 xs:px-3">{children}</div>;
 };
 
 export default Modal;

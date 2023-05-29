@@ -6,7 +6,11 @@ import InputWithLabel from "../atoms/Input";
 import Slider from "../atoms/Slider";
 import Modal from "./Modal";
 
-export default function Search() {
+interface SearchProps {
+  size: "xs" | "sm" | "md" | "lg";
+}
+
+export default function Search<SearchProps>({ size="sm" }) {
   const [searchVisible, setSearchVisible] = React.useState(false);
   const [filterVisible, setFilterVisible] = React.useState(false);
   const handler = () => setSearchVisible(true);
@@ -15,11 +19,9 @@ export default function Search() {
 
   const closeSearchHandler = () => {
     setSearchVisible(false);
-    console.log("closed");
   };
   const closeFilterHandler = () => {
     setFilterVisible(false);
-    console.log("closed");
   };
   return (
     <>
@@ -68,7 +70,7 @@ export default function Search() {
           <InputWithLabel label={t("filter.modal.keyword")}></InputWithLabel>
           <div className="container mx-auto flex flex-col">
             <label className="text-gray-700 font-semibold mb-4">
-            {t("filter.modal.minimumHours")}
+              {t("filter.modal.minimumHours")}
             </label>
             <Slider min={0} max={12} />
           </div>
@@ -76,22 +78,22 @@ export default function Search() {
         <Modal.footer>
           <div className="flex flex-row justify-between pt-6 mt-6">
             <button className="bg-transparent text-black py-2 rounded-full px-12">
-            {t("filter.modal.clear")}
+              {t("filter.modal.clear")}
             </button>
             <button className="bg-black text-white py-2 rounded-full px-12">
-            {t("filter.modal.show", { value: "123" })}
+              {t("filter.modal.show", { value: "123" })}
             </button>
           </div>
         </Modal.footer>
       </Modal>
 
-      <div className="bg-white w-1/2 min-w-[350px] rounded-full flex items-center justify-between pl-6 pr-2 py-2 cursor-pointer">
+      <div className={`bg-white w-1/2 min-w-[350px] rounded-full flex items-center border border-gray-300 justify-between ${size === 'xs'? 'pl-4 pr-0.5 py-0.5' : 'pl-6 pr-2 py-2' } cursor-pointer`}>
         <IoSearch color="black" className="pr-1" size={25} />
         <div onClick={handler} className="ml-2 flex-1">
-          <h2 className="text-md font-medium text-gray-800">
+          <p key={size} className={`text-${size} font-medium text-gray-800`}>
             {t("search.whatAreYouPlanning")}
-          </h2>
-          <p className="text-sm font-light text-gray-500">
+          </p>
+          <p className={`text-${size} font-light text-gray-500`}>
             {t("search.subTitle")}
           </p>
         </div>

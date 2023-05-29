@@ -58,7 +58,7 @@ const Dropdown: React.FC<DropdownProps> = ({ children, items, onSelect }) => {
   return (
     <div className="dropdown" ref={dropdownRef}>
       <button
-        className=""
+        className="hover:opacity-50"
         type="button"
         onClick={toggleDropdown}
       >

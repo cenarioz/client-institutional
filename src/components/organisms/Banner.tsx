@@ -1,5 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
 import { IoMap } from "react-icons/io5";
 import Search from "../molecules/Search";
 
@@ -17,10 +18,10 @@ const Banner = () => {
               {t("banner.message")}
             </p>
 
-            <button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-3 px-5 border rounded-full gap-2 shadow inline-flex items-center">
+            <Link href={'explore'} className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-3 px-5 border rounded-full gap-2 shadow inline-flex items-center">
               <span> {t("banner.button")}</span>
               <IoMap />
-            </button>
+            </Link>
           </div>
         </div>
       </div>

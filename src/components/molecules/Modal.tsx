@@ -1,4 +1,5 @@
-import React, { ReactNode, useEffect, useRef } from "react";
+'use-client'
+import React, { ReactNode, useEffect, useRef, useState } from "react";
 import { TfiClose } from "react-icons/tfi";
 
 type ModalProps = {
@@ -6,7 +7,7 @@ type ModalProps = {
   onClose: () => void;
   title: string;
   children: ReactNode;
-  size?: "sm" | "md" | "large";
+  size?: "sm" | "md" | "large" | "full";
 };
 
 type ModalFooterProps = {
@@ -21,6 +22,20 @@ const Modal: React.FC<ModalProps> & { footer: React.FC<ModalFooterProps> } = ({
   size,
 }) => {
   const modalRef = useRef<HTMLDivElement>(null);
+
+  const [isBodyHidden, setIsBodyHidden] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      setIsBodyHidden(true);
+      document.body.style.overflow = "hidden";
+    } else {
+      setIsBodyHidden(false);
+      document.body.style.overflow = "";
+    }
+  }, [isOpen]);
+
+
 
   useEffect(() => {
     const handleEscapeKeyPress = (event: KeyboardEvent) => {
@@ -51,21 +66,21 @@ const Modal: React.FC<ModalProps> & { footer: React.FC<ModalFooterProps> } = ({
 
   if (!isOpen) return null;
   const modalSize = () => {
-
     switch (size) {
-      case 'sm':
-        return 'xl:w-2/5'
+      case "sm":
+        return "xl:w-2/5 md:top-10";
+      case "full":
+        return "xl:w-full xl:h-screen md:top-0";
       default:
-        return 'xl:w-2/4'
+        return "xl:w-2/4 md:top-10";
     }
-    
   };
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50">
+    <div className="fixed inset-0 items-center justify-center z-50">
       <div className="modal-overlay bg-black opacity-50 fixed inset-0"></div>
       <div
         ref={modalRef}
-        className={`modal bg-white rounded-md p-4 xs:pt-12 relative w-full max-w-md mx-auto ${
+        className={`modal overflow-y-auto bg-white rounded-md p-4 xs:pt-12 relative w-full max-w-md mx-auto ${
           isOpen
             ? `sm:max-w-full xs:h-screen md:h-auto md:w-4/5 lg:w-3/5  ${modalSize()}`
             : ""
@@ -90,7 +105,11 @@ const Modal: React.FC<ModalProps> & { footer: React.FC<ModalFooterProps> } = ({
 };
 
 Modal.footer = ({ children }) => {
-  return <div className="modal-footer xs:absolute xs:bottom-8 xs:right-0 xs:left-0 xs:px-3">{children}</div>;
+  return (
+    <div className="modal-footer xs:absolute xs:bottom-8 xs:right-0 xs:left-0 xs:px-3">
+      {children}
+    </div>
+  );
 };
 
 export default Modal;

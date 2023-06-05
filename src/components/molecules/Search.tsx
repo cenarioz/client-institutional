@@ -1,16 +1,18 @@
 import { useTranslations } from "next-intl";
-import React from "react";
+import React, { HTMLProps } from "react";
 import { IoSearch } from "react-icons/io5";
+import { TbAdjustmentsHorizontal } from "react-icons/tb";
 import Button from "../atoms/Button";
 import InputWithLabel from "../atoms/Input";
 import Slider from "../atoms/Slider";
 import Modal from "./Modal";
 
 interface SearchProps {
-  size: "xs" | "sm" | "md" | "lg";
+  size?: "xs" | "sm" | "md" | "lg";
+  className?: HTMLProps<HTMLElement>["className"];
 }
 
-export default function Search<SearchProps>({ size="sm" }) {
+export default function Search({ size = "sm", className }: SearchProps) {
   const [searchVisible, setSearchVisible] = React.useState(false);
   const [filterVisible, setFilterVisible] = React.useState(false);
   const handler = () => setSearchVisible(true);
@@ -23,6 +25,21 @@ export default function Search<SearchProps>({ size="sm" }) {
   const closeFilterHandler = () => {
     setFilterVisible(false);
   };
+
+  const fontSize = ()=> {
+    switch (size) {
+      case 'sm':
+        return '0.875rem';
+      case 'xs':
+        return '0.75rem';
+      case 'md':
+        return '1rem';
+    
+      default:
+        break;
+    }
+  }
+
   return (
     <>
       <Modal
@@ -87,17 +104,26 @@ export default function Search<SearchProps>({ size="sm" }) {
         </Modal.footer>
       </Modal>
 
-      <div className={`bg-white w-1/2 min-w-[350px] rounded-full flex items-center border border-gray-300 justify-between ${size === 'xs'? 'pl-4 pr-0.5 py-0.5' : 'pl-6 pr-2 py-2' } cursor-pointer`}>
+      <div
+        className={`bg-white w-1/2 min-w-[350px] rounded-full flex items-center border border-gray-300 justify-between ${
+          size === "xs" ? "pl-4 pr-0.5 py-0.5" : "pl-6 pr-2 py-2"
+        } cursor-pointer ${className}`}
+      >
         <IoSearch color="black" className="pr-1" size={25} />
         <div onClick={handler} className="ml-2 flex-1">
-          <p key={size} className={`text-${size} font-medium text-gray-800`}>
+          <p key={size} className={`font-medium text-gray-800`} style={{fontSize: fontSize()}}>
             {t("search.whatAreYouPlanning")}
           </p>
-          <p className={`text-${size} font-light text-gray-500`}>
+          <p className={`font-ligth text-gray-500`} style={{fontSize: fontSize()}}>
             {t("search.subTitle")}
           </p>
         </div>
-        <Button onClick={handlerFilter}></Button>{" "}
+        <Button onClick={handlerFilter} bordered>
+          <TbAdjustmentsHorizontal
+            size={20}
+            color="black"
+          ></TbAdjustmentsHorizontal>
+        </Button>{" "}
       </div>
     </>
   );

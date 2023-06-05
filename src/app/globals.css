@@ -1,11 +1,13 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
 :root {
   --foreground-rgb: 255,255, 255;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  --primary-color-300: #6332FF;
+  --primary-color-500: #5122E9;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -103,15 +105,6 @@ body {
   background-color: #f1f1f1;
 }
 
-/********************************************
-	BREAKPOINT WIDTHS
-********************************************/
-/********************************************
-	FONTS
-********************************************/
-/********************************************
-	COLOURS
-********************************************/
 .carousel .control-arrow, .carousel.carousel-slider .control-arrow {
   -webkit-transition: all 0.25s ease-in;
   -moz-transition: all 0.25s ease-in;
@@ -351,3 +344,40 @@ body {
     color: #fff; }
   .carousel:hover .slide .legend {
     opacity: 1; }
+
+  .react-datepicker__day {
+    border: 1px solid #ddd;
+    padding: 4px;
+    border-radius: 4px;
+    width: 3em !important;
+    height: 3em !important;
+    display: inline-grid !important;
+    align-items: center;
+  }
+
+
+  .react-datepicker__day--selected {
+    background-color: var(--primary-color-300) !important;
+  }
+
+  .react-datepicker__current-month {
+    font-weight: 400 !important;
+    font-size: 1.25em !important;
+  }
+
+  .react-datepicker__day-names {
+    margin-bottom: -8px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.css-b62m3t-container {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.category svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}

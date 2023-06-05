@@ -8,7 +8,7 @@ const Banner = () => {
   const t = useTranslations();
   return (
     <>
-      <div className="relative bg-cover bg-center bg-[url('https://images.pexels.com/photos/6883795/pexels-photo-6883795.jpeg')] pt-24 pb-20">
+      <div className="relative -mt-16 bg-cover bg-center bg-[url('https://images.pexels.com/photos/6883795/pexels-photo-6883795.jpeg')] pt-24 pb-20">
         <div className="flex flex-col top-1/3 left-0 w-full items-center ">
           <div className="flex container mx-auto px-4 text-white align-middle justify-center">
             <Search />

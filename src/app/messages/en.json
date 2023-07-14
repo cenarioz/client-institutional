@@ -70,5 +70,22 @@
     "title": "Our Mission",
     "session1": "Cenárioz is an online platform that connects property owners with renters looking to film or host events in their spaces. The platform allows renters to search for filming locations, communicate with owners, and easily make payments, all in one place.",
     "session2": "The main goal of Cenárioz is to provide renters with a platform to easily find and book unique filming locations and event spaces in a more affordable way. Additionally, the platform offers property owners a new opportunity to showcase their properties and earn additional income."
+  },
+  "enum": {
+    "HOUR": "Hour",
+    "DAY": "Day",
+    "MONTH": "Month",
+    "parking_spots": "{value} parking spots: Street parking available or parking structure nearby. Please confirm with the host.",
+    "elevator": "Elevator",
+    "freight_elevator": "Freight Elevator",
+    "stairs": "Stairs",
+    "street_level": "Street Level",
+    "wheelchair": "Wheel Chair Ramp"
+  },
+  "place": {
+    "parking": "Parking",
+    "category/style":"Category e style",
+    "more": "See More",
+    "less": "See Less"
   }
 }

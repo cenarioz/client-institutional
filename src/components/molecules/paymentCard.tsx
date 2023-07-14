@@ -1,40 +1,357 @@
+import { IBooking, IOpeningHour, IPlace } from "@/commons/@types/place";
+import moment from "moment";
+import { useTranslations } from "next-intl";
+import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
 import Button from "../atoms/Button";
 import DatePickerComponent from "../atoms/DatePicker";
 import Select from "../atoms/Select";
 import TimePickerComponent from "../atoms/TimePicker";
 
+interface PaymentCardProps {
+  openingHours: IOpeningHour[];
+  bookings: IBooking[];
+  place: IPlace;
+  isLoading?: boolean;
+}
 
-export default function PaymentCard() {
+function getFormattedDates(start: string, end: string): Date[] {
+  const startDate = moment(start, "YYYY-MM-DD HH:mm:ss");
+  const endDate = moment(end, "YYYY-MM-DD HH:mm:ss");
+  const dates: Date[] = [];
+
+  if (startDate.isSameOrBefore(endDate)) {
+    let current = startDate.clone();
+
+    while (current.isSameOrBefore(endDate)) {
+      dates.push(current.toDate());
+      current.add(1, "hour");
+    }
+  }
+
+  return dates;
+}
+
+function getWeekday(date: Date): string {
+  const weekdays = [
+    "SUNDAY",
+    "MONDAY",
+    "TUESDAY",
+    "WEDNESDAY",
+    "THURSDAY",
+    "FRIDAY",
+    "SATURDAY",
+  ];
+  const weekdayIndex = date.getDay();
+
+  return weekdays[weekdayIndex];
+}
+
+function generateDate(date: string, hour: string): string {
+  if (!hour) return "";
+  const datePieces = date.split("-");
+  const year = parseInt(datePieces[0]);
+  const month = parseInt(datePieces[1]);
+  const day = parseInt(datePieces[2]);
+  const hourPieces = hour.split(":");
+  const hours = parseInt(hourPieces[0]);
+  const min = parseInt(hourPieces[1]);
+  const sec = parseInt(hourPieces[2]);
+
+  const data = new Date(year, month - 1, day, hours, min, sec);
+  return moment(data).format("YYYY-MM-DD HH:mm:ss");
+}
+
+function blockWeekendDays(selectedDate: Date | null, blockedDayOfWeek: string) {
+  if (!selectedDate) return [];
+  var startDate = new Date(
+    selectedDate.getFullYear(),
+    selectedDate.getMonth() - 1,
+    1
+  );
+  var endDate = new Date(
+    selectedDate.getFullYear(),
+    selectedDate.getMonth() + 2,
+    0
+  );
+
+  var blockedDays = [];
+
+  for (
+    var date = startDate;
+    date <= endDate;
+    date.setDate(date.getDate() + 1)
+  ) {
+    var dayOfWeek = getWeekday(date);
+    if (dayOfWeek === blockedDayOfWeek) {
+      blockedDays.push(new Date(date));
+    }
+  }
+
+  return blockedDays;
+}
+
+function monetary(value: number) {
+  return new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  }).format(value);
+}
+
+export default function PaymentCard({
+  openingHours,
+  bookings,
+  place,
+  isLoading,
+}: PaymentCardProps) {
+  if (isLoading) {
+    return (
+      <div className="w-full h-fit bg-white rounded-lg border-gray-200 top-20 border sticky p-6">
+        {/* Skeleton Loading for Price */}
+        <div className="h-6 bg-gray-300 mb-2 rounded w-1/2 mx-auto"></div>
+
+        {/* Skeleton Loading for Minimum */}
+        <div className="h-4 bg-gray-300 mb-4 w-3/4 mx-auto rounded"></div>
+
+        {/* Skeleton Loading for DatePickerComponent */}
+        <div className="mb-4 flex justify-start items-start flex-col text-left">
+          <div className="h-6 bg-gray-300 mb-2 rounded w-1/3"></div>
+          <div className="h-11 bg-gray-300 px-4 py-2 mt-2 w-full rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"></div>
+        </div>
+
+        {/* Skeleton Loading for TimePickerComponent */}
+        <div className="flex mb-2 gap-1">
+          <div className="h-10 bg-gray-300 w-full rounded"></div>
+          <div className="h-10 bg-gray-300 w-full rounded"></div>
+        </div>
+
+        {/* Skeleton Loading for TotalSelectedHours */}
+        <div className="w-full flex text-xs justify-end items-end text-gray-500 mb-2">
+          <div className="h-4 bg-gray-300 rounded w-1/3"></div>
+        </div>
+        {/* Skeleton Loading for Button */}
+        <div className="mt-4">
+          <div className="h-12 bg-gray-300 rounded w-full mx-auto"></div>
+        </div>
+        {/* Skeleton Loading for Total with Tax */}
+        <div className="mt-4 border-t border-gray-300 pt-2 flex justify-between">
+          <div className="h-6 bg-gray-300 rounded w-1/2"></div>
+          <div className="h-6 bg-gray-300 rounded w-1/4"></div>
+        </div>
+      </div>
+    );
+  } else {
+    return (
+      <PaymentCardComponent
+        openingHours={openingHours}
+        bookings={bookings}
+        place={place}
+      />
+    );
+  }
+}
+
+function PaymentCardComponent({
+  openingHours,
+  bookings,
+  place,
+}: PaymentCardProps) {
+  const t = useTranslations();
+  const params = useParams();
+
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [selectedStartHour, setSelectedStartHour] = useState<Date | null>(null);
+  const [selectedEndHour, setSelectedEndHour] = useState<Date | null>(null);
+  const [selectedMonth, setSelectedMonth] = useState<Date | null>(null);
+  const [blockedDays, setblockedDays] = useState<Date[]>([]);
+  const [totalSelectedHours, setTotalSelectedHours] = useState<number>(0);
+
+  useEffect(() => {
+    const diff =
+      (selectedEndHour ? selectedEndHour.getTime() : 0) -
+      (selectedStartHour ? selectedStartHour.getTime() : 0);
+    const calcHours = Math.round(diff / (1000 * 60 * 60));
+    setTotalSelectedHours(calcHours <= 0 ? 0 : calcHours);
+  }, [selectedEndHour, selectedStartHour]);
+
+  const datee = moment(selectedDate).format("YYYY-MM-DD");
+  const locatedDates: string[] = [];
+
+  const myDate = new Date();
+
+  const weekday = getWeekday(myDate);
+  const openTimeOfDay = openingHours.find((day) => day.day_of_week === weekday);
+
+  const openingHoursTime = getFormattedDates(
+    generateDate(datee, "00:00:00"),
+    generateDate(datee, openTimeOfDay?.opening_time as any)
+  );
+  const closingHoursTime = getFormattedDates(
+    generateDate(datee, openTimeOfDay?.closing_time as any),
+    generateDate(datee, "23:00:00")
+  );
+
+  const endHoursTime = selectedStartHour
+    ? getFormattedDates(
+        generateDate(datee, "00:00:00"),
+        generateDate(datee, moment(selectedStartHour).format("HH:mm:ss"))
+      )
+    : [];
+
+  bookings.forEach((booking) => {
+    locatedDates.push(booking.start_date, booking.end_date);
+  });
+
+  const targetDate = datee;
+  const bookinsOfDay = locatedDates.filter((item) =>
+    item.startsWith(targetDate)
+  );
+  const startOfStartHour = moment(bookinsOfDay[0]).subtract(1, "hour");
+  const endOfStartHour = moment(bookinsOfDay[bookinsOfDay.length - 1]);
+
+  const totalPrice = place.details.price_pp_hourly_0 * totalSelectedHours;
+  const managementFee = (9.5 / 100) * totalPrice;
+  const totalWithTax = totalPrice + managementFee;
+
+  const removeHoursFromStartHour = [
+    ...openingHoursTime,
+    ...getFormattedDates(
+      startOfStartHour.toDate() as any,
+      endOfStartHour.toDate() as any
+    ),
+    ...closingHoursTime,
+  ];
+  const removeHoursFromEndHour = [
+    ...openingHoursTime,
+    ...endHoursTime,
+    ...closingHoursTime,
+  ];
+
+  const disableCrew =
+    !place.details.price_pp_hourly_1 &&
+    !place.details.price_pp_hourly_2 &&
+    !place.details.price_pp_hourly_3 &&
+    !place.details.price_pp_hourly_4 &&
+    !place.details.price_pp_hourly_5;
+
+  const disabledDayOfWeek = (date: Date | null) => {
+    const rel: Date[] = [];
+
+    openingHours.forEach((openHour) => {
+      if (!openHour.active)
+        rel.push(...blockWeekendDays(date, openHour.day_of_week));
+    });
+
+    return rel;
+  };
+
+  useEffect(() => {
+    setblockedDays([...blockedDays, ...disabledDayOfWeek(new Date())]);
+  }, []);
+
+  const handleDateSelect = (date: Date | null) => {
+    setSelectedDate(date);
+    setSelectedStartHour(null);
+    setSelectedEndHour(null);
+  };
+  const handleStartHourSelect = (date: Date | null) => {
+    setSelectedStartHour(date);
+    setSelectedEndHour(null);
+  };
+  const handleEndHourSelect = (date: Date | null) => {
+    setSelectedEndHour(date);
+  };
+  const handleSelectedMonth = (date: Date | null) => {
+    setSelectedMonth(date);
+    setblockedDays([...blockedDays, ...disabledDayOfWeek(date)]);
+  };
+
   return (
-    <div className="w-full h-fit bg-white rounded-lg border-gray-200 top-20 border sticky p-4">
-      <h1 className="text-lg text-center">R$ 150,00/ Hora</h1>
-      <h2 className="text-xs text-gray-500 mb-2 text-center">
-        4 horas de aluguel no mínimo
-      </h2>
+    <div className="w-full h-fit bg-white rounded-lg border-gray-200 top-20 border sticky p-6">
+      <h1 className="text-lg text-center">
+        {monetary(place.details.price_pp_hourly_0)}/{" "}
+        {t(`enum.${place.value_type}`)}
+      </h1>
+      {place.minimum && (
+        <h2 className="text-xs text-gray-500 mb-2 text-center">
+          {place.minimum > 1
+            ? `${place.minimum} horas de aluguel no mínimo`
+            : `${place.minimum} hora de aluguel no mínimo`}
+        </h2>
+      )}
+
       <div className="mb-4">
-        <DatePickerComponent label="Data / Hora"></DatePickerComponent>
+        <DatePickerComponent
+          bookings={bookings}
+          openingHours={openingHours}
+          selectedDate={selectedDate}
+          onChange={handleDateSelect}
+          label="Data / Hora"
+          onMonthChange={handleSelectedMonth}
+          excludeDates={blockedDays}
+        />
       </div>
-      <div className="flex mb-4 gap-1">
-        <TimePickerComponent placeholder="Data Inicial"></TimePickerComponent>
-        <TimePickerComponent placeholder="Data Final"></TimePickerComponent>
+      <div className="flex mb-2 gap-1">
+        <TimePickerComponent
+          bookings={bookings}
+          selectedTime={selectedStartHour}
+          excludedDays={removeHoursFromStartHour}
+          openingHours={openingHours}
+          placeholder="Hora Inicial"
+          onChange={handleStartHourSelect}
+          disabled={!selectedDate}
+        />
+        <TimePickerComponent
+          bookings={bookings}
+          selectedTime={selectedEndHour}
+          excludedDays={removeHoursFromEndHour}
+          openingHours={openingHours}
+          placeholder="Hora Final"
+          onChange={handleEndHourSelect}
+          disabled={!selectedStartHour}
+        />
       </div>
-      <div className="mb-4">
-        <Select label="Participantes"></Select>
+      <div className="flex justify-end w-full text-xs text-gray-500">
+        <p>Total de Horas: {totalSelectedHours}</p>
       </div>
-      <Button onClick={() => {}} full rounded="md">
-        Continuar
-      </Button>
-      <div className="mt-4 pt-2 flex justify-between">
-        <p className="text-sm text-gray-800">R$ 150,00 x 4 horas</p>
-        <p className="text-sm text-gray-800 text-right">R$ 600,00</p>
+
+      {!disableCrew && (
+        <div className="mb-4">
+          <Select label="Participantes" details={place.details} />
+        </div>
+      )}
+      <div className="mt-4">
+        <Button onClick={() => {}} full rounded="md">
+          Continuar
+        </Button>
       </div>
-      <div className="mt-2 flex justify-between">
-        <p className="text-sm text-gray-800">Taxa de serviço do Cenarioz</p>
-        <p className="text-sm text-gray-800 text-right">R$ 60,00</p>
-      </div>
+      {totalSelectedHours != 0 && (
+        <div>
+          <div className="mt-4 pt-2 flex justify-between">
+            <p className="text-sm text-gray-800">
+              {place.details.price_pp_hourly_0} x{" "}
+              {totalSelectedHours > 1
+                ? `${totalSelectedHours} Horas`
+                : `${totalSelectedHours} Hora`}
+            </p>
+            <p className="text-sm text-gray-800 text-right">
+              {monetary(totalPrice)}
+            </p>
+          </div>
+          <div className="mt-2 flex justify-between">
+            <p className="text-sm text-gray-800">Taxa de serviço Icone</p>
+            <p className="text-sm text-gray-800 text-right">
+              {monetary(managementFee)}
+            </p>
+          </div>
+        </div>
+      )}
+
       <div className="mt-4 border-t border-gray-300 pt-2 flex justify-between">
-        <p className="text-lg text-gray-900">Total (sem impostos)</p>
-        <p className="text-lg font-bold text-gray-900 text-right">R$660,00</p>
+        <p className="text-lg text-gray-900">Total com taxas</p>
+        <p className="text-lg font-bold text-gray-900 text-right">
+          {monetary(totalWithTax)}
+        </p>
       </div>
     </div>
   );

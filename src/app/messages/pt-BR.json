@@ -70,5 +70,33 @@
     "title": "Nossa Missão",
     "session1": "A Cenarioz é uma plataforma online que conecta proprietários de imóveis com locatários que desejam filmar ou realizar eventos em seus espaços. A plataforma permite que os locatários pesquisem locais para filmagem, se comuniquem com os proprietários e paguem facilmente, tudo em um só lugar.",
     "session2": "O principal objetivo da Cenarioz é fornecer aos locatários uma plataforma para encontrar e reservar facilmente locais únicos para filmagem e espaços para eventos de forma mais acessível. Além disso, a plataforma oferece aos proprietários de imóveis uma nova oportunidade de exibir suas propriedades e obter uma renda adicional."
+  },
+  "enum": {
+    "HOUR": "Hora",
+    "DAY": "Dia",
+    "MONTH": "Mês",
+    "parking_spots": "{value} vagas de estacionamento no local: Rua Estacionamento disponível ou estrutura de estacionamento nas proximidades. Por favor, confirme com o anfitrião.",
+    "elevator": "Elevador",
+    "freight_elevator": "Elevador de Carga",
+    "stairs": "Escadas",
+    "street_level": "Terreo",
+    "wheelchair": "Rampa para cadeirantes",
+    "day_week": {
+      "MONDAY": "Segunda-feira",
+      "TUESDAY": "Terça-feira",
+      "WEDNESDAY": "Quarta-feira",
+      "THURSDAY": "Quinta-feira",
+      "FRIDAY": "Sexta-feira",
+      "SATURDAY": "Sábado",
+      "SUNDAY": "Domingo"
+    }
+  },
+  "place": {
+    "parking": "Estacionamento",
+    "category/style": "Categoria e estilo",
+    "more": "Ver Mais",
+    "less": "Ver Menos",
+    "opening_hours": "Horário de funcionamento",
+    "crew_access": "Acesso da Tripulação" 
   }
 }

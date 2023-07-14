@@ -1,102 +1,266 @@
 "use client";
+
+import { IPlace } from "@/commons/@types/place";
+import { useTranslations } from "next-intl";
+import { useState } from "react";
+import {
+  IoBalloonOutline,
+  IoCafeOutline,
+  IoExpandOutline,
+  IoPeopleOutline,
+  IoTimeOutline,
+  IoVideocamOutline,
+} from "react-icons/io5";
 import Divisor from "../atoms/Divisor";
 import Categories from "../molecules/Categories";
 import Property from "../molecules/Property";
 import PaymentCard from "../molecules/paymentCard";
 
-function PostHeader() {
-  const property = [
-    {
-      title: "Categoria e estilo",
-      description: "Estúdio Loft, Estúdio de Fotografia",
+interface PostBodyProps {
+  place: IPlace;
+}
+
+function PostBody({ place }: PostBodyProps) {
+  const t = useTranslations();
+  const [more, setMore] = useState(false);
+
+  const placeSizes = [
+    place.details?.size &&
+      `Tamanho da propriedade (metros quadrados): ${place.details.size} M²`,
+    place.details?.height && `Altura: ${place.details?.height} M`,
+    place.details?.width && `Largura: ${place.details?.width} M`,
+    place.details?.length && `Comprimento: ${place.details?.length} M`,
+  ];
+
+  const crewAccess = [
+    "elevator",
+    "freight_elevator",
+    "stairs",
+    "street_level",
+    "wheelchair",
+  ];
+
+  const crewAccessDescription: string[] = Object.keys(place.details)
+    .filter((key, index) => {
+      if (crewAccess.includes(key) && place.details[key] === true) return true;
+    })
+    .map((key) => {
+      return t(`enum.${key}`);
+    });
+
+  const dayOrder = [
+    "SUNDAY",
+    "MONDAY",
+    "TUESDAY",
+    "WEDNESDAY",
+    "THURSDAY",
+    "FRIDAY",
+    "SATURDAY",
+  ];
+
+  place.opening_hours.sort((a, b) => {
+    const dayA = dayOrder.indexOf(a.day_of_week);
+    const dayB = dayOrder.indexOf(b.day_of_week);
+    return dayA - dayB;
+  });
+
+  const property: any = [
+    place.details?.parking_spots && {
+      title: t("place.parking"),
+      description: t(`enum.parking_spots`, {
+        value: place.details?.parking_spots,
+      }),
     },
-    {
-      title: "Estacionamento",
-      description:
-        "Caminhão/autocaravana estacionamento no local: Rua\nEstacionamento disponível ou estrutura de estacionamento nas proximidades\nzona permitida\nO endereço provavelmente se enquadra na seguinte zona de permissão: Los Angeles . Por favor, confirme com o anfitrião.",
+
+    place.categories?.length > 0 && {
+      title: t("place.category/style"),
+      description: place.categories
+        .map((category) => {
+          return category.name;
+        })
+        .join(", "),
     },
-    {
+
+    placeSizes?.length > 0 && {
       title: "Detalhes do local",
-      description: "Tamanho da propriedade (pés quadrados):1450 pés quadrados",
+      description: placeSizes.join(", "),
     },
-    {
+
+    place.rules?.length > 0 && {
       title: "Regras de localização",
-      description:
-        "Proibido fumar\nFilmagem adulta permitida\nsem álcool\nsem cozinhar\nUso de eletricidade permitido\nSem ruídos altos\nCatering/alimentação externa permitida\nNenhum animal de estimação\nSEM SAPATOS NO SOFÁ. Por favor, faça todo o possível para não sujá-lo.\nSEM SAPATOS NO TAPETE. SEM ESCADA OU EQUIPAMENTO NO TAPETE.\nSEM FICAR SOBRE OS MÓVEIS. Uma taxa substancial de limpeza ou taxa de substituição será adicionada à reserva para os hóspedes que\nSEM PEQUENAS PARTÍCULAS DIFÍCEIS DE LIMPAR. Você será cobrado uma taxa de danos se os sofás forem deixados com glitter\nRIGOROSA POLÍTICA DE ALIMENTOS E BEBIDAS. O consumo de alimentos e bebidas só é permitido usando nossos móveis dobráveis. Estritamente sem comida o\nO espaço NÃO é à prova de som e não permitiremos música alta. Não há bandas ao vivo ou apresentações para videoclipes. A música pode\nSEM FUMAR, SEM VAPOR, SEM QUEIMA DE VELAS, SEM INCENSO no estúdio e no prédio, SEM NÉVOA OU MÁQUINA DE NÉVOA. SEM PINTURA, SA",
+      description: place.rules
+        .map((rule) => {
+          return rule.name;
+        })
+        .join(", "),
     },
-    {
+
+    place.features?.length > 0 && {
+      title: "Recursos",
+      description: place.features
+        .map((feature) => {
+          return feature.name;
+        })
+        .join(", "),
+    },
+
+    place.amenities?.length > 0 && {
       title: "Facilidades",
-      description: "Área de cabelo/maquilhagem\nWi-fi",
+      description: place.amenities
+        .map((amenity) => {
+          return amenity.name;
+        })
+        .join(", "),
     },
+
     {
       title: "Características",
       description:
         "Piso de carpete\nPiso de concreto\nParedes de tijolo\nParedes de textura\nparedes brancas\nJanelas do chão ao teto",
     },
+    crewAccessDescription?.length > 0 && {
+      title: t("place.crew_access"),
+      description: crewAccessDescription.join(", "),
+    },
+    place.opening_hours?.length > 0 && {
+      title: t("place.opening_hours"),
+      description: (
+        <>
+          {place.opening_hours?.map((openHour) => {
+            return (
+              <div
+                key={Math.random()}
+                className={`${
+                  !openHour?.active && "text-gray-500"
+                } flex justify-between`}
+              >
+                <div>{t(`enum.day_week.${openHour?.day_of_week}`)}</div>
+                <div>
+                  {openHour?.active
+                    ? `${openHour?.opening_time} - ${openHour?.closing_time}`
+                    : "fechado"}
+                </div>
+              </div>
+            );
+          })}
+        </>
+      ),
+    },
+  ];
+
+  const truncate = (input: string) =>
+    input?.length > 300 ? `${input.substring(0, 254)}...` : input;
+
+  const handleMore = () => {
+    more && setMore(false);
+    !more && setMore(true);
+  };
+
+  const info = [
     {
-      title: "Acesso da tripulação",
-      description:
-        "Elevador\nElevador de carga\nEscadaria\nAcesso para Cadeira de Rodas/Deficientes",
+      icon: <IoTimeOutline />,
+      name: `${place?.minimum > 1 ? `${place?.minimum} Horas` : "1 Hora"}`,
+      disabled: !place?.minimum,
     },
     {
-      title: "Horário de funcionamento",
-      description:
-        "Domingo6h00 - 6h00\nSegunda-feira6h00 - 6h00\nTerça-feira6h00 - 6h00\nQuarta-feira6h00 - 6h00\nQuinta-feira6h00 - 6h00\nSexta-feira6h00 - 6h00\nSábado6h00 - 6h00",
+      icon: <IoPeopleOutline />,
+      name: `${
+        place?.details?.max_attendees > 1
+          ? `${place?.details?.max_attendees} Pessoas`
+          : `1 Pessoa`
+      }`,
+      disabled: !place?.details?.max_attendees,
+    },
+    {
+      icon: <IoExpandOutline />,
+      name: `${place?.details?.size} M²`,
+      disabled: !place?.details?.size,
+    },
+    {
+      icon: <IoVideocamOutline />,
+      name: "Produção",
+      disabled: !place?.details?.production,
+    },
+    {
+      icon: <IoBalloonOutline />,
+      name: "Evento",
+      disabled: !place?.details?.event,
+    },
+    {
+      icon: <IoCafeOutline />,
+      name: "Reunião",
+      disabled: !place?.details?.meeting,
     },
   ];
 
   return (
-    <div className="grid py-16 grid-cols-4">
-      <div className="pr-8 col-span-3">
-        <h1 className="text-xl font-medium mb-5">Eventos Permitidos</h1>
-        <Categories />
-
+    <div className="flex py-16">
+      <div className="w-2/3">
+        <h1 className="text-xl font-medium mb-5">Informações</h1>
+        <Categories props={info} />
+        <h1 className="text-xl font-medium mb-5">Descrição do Ambiente</h1>
         <p className="text-base">
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industrys standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book. It has survived not only
-          five centuries, but also the leap into electronic typesetting,
-          remaining essentially unchanged. It was popularised in the 1960s with
-          the release of Letraset sheets containing Lorem Ipsum passages, and
-          more recently with desktop publishing software like Aldus PageMaker
-          including versions of Lorem Ipsum.
+          {!more ? truncate(place.description) : place.description}
         </p>
-        <p className="w-full text-center underline py-6">Ver Mais</p>
+        <div className="w-full text-center underline py-4">
+          {place.description.length > 300 && (
+            <p onClick={handleMore}>
+              {!more ? t("place.more") : t("place.less")}
+            </p>
+          )}
+        </div>
+
         <Divisor></Divisor>
 
         <div className="mt-5">
           <h1 className="text-xl font-medium mb-5">Sobre o Espaço</h1>
-          {property.map((item) => {
+          {property.map((item: { title: string; description: string }) => {
             return (
               <Property
                 key={Math.random()}
-                title={item.title}
-                description={item.description}
+                title={item?.title}
+                description={
+                  typeof item?.description === "function"
+                    ? item?.description
+                    : item?.description
+                }
               ></Property>
             );
           })}
         </div>
         <Divisor></Divisor>
         <div className="flex flex-row content-center">
-          <div className="w-20 h-20 bg-gray-300 rounded-full mx-10 mr-5 my-10"></div>
+          <div className="w-20 h-20 bg-gray-300 rounded-full my-10 mr-4 overflow-hidden">
+            <img
+              src={place.host.user.photo}
+              style={{ height: "100%", width: "100%", objectFit: "cover" }}
+              alt=""
+            ></img>
+          </div>
           <div className="flex flex-col justify-center">
-            <p className="font-bold">Victor A.</p>
+            <p className="font-bold">{place.host.user.name}</p>
             <p className="font-normal text-sm text-gray-500">
-              <span className="font-medium">Response rating:</span>Excellent
+              <span className="font-medium">Response rating: </span>
+              {place.host.response_rating}
             </p>
             <p className="font-normal  text-sm  text-gray-500">
-              <span className="font-medium">Response time:</span> Within an hour
+              <span className="font-medium">Response time:</span>{" "}
+              {place.host.time_rating}
             </p>
           </div>
         </div>
         <Divisor></Divisor>
       </div>
-      <div className="">
-        <PaymentCard></PaymentCard>
+      <div className="ml-[8.333333333333332%] w-1/3">
+        <PaymentCard
+          openingHours={place.opening_hours}
+          bookings={place.bookings}
+          place={place}
+          isLoading={!place}
+        ></PaymentCard>
       </div>
     </div>
   );
 }
 
-export default PostHeader;
+export default PostBody;

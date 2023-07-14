@@ -1,4 +1,5 @@
 import { IDetails } from "@/commons/@types/place";
+import { useTranslations } from "next-intl";
 import SelectLib from "react-select";
 
 interface SelectProps {
@@ -7,17 +8,18 @@ interface SelectProps {
 }
 
 const Select = ({ label, details }: SelectProps) => {
+  const t = useTranslations();
   const handleChange = (selectedOption: any) => {
     console.log("Opção selecionada:", selectedOption);
   };
 
   const options = [
-    { value: "1", label: "1 - 5 pessoas", disabled: !details.price_pp_hourly_0 },
-    { value: "2", label: "6 - 15 pessoas", disabled: !details.price_pp_hourly_1},
-    { value: "3", label: "16 - 30 pessoas", disabled: !details.price_pp_hourly_2 },
-    { value: "4", label: "31 - 45 pessoas", disabled: !details.price_pp_hourly_3 },
-    { value: "5", label: "46 - 60 pessoas", disabled: !details.price_pp_hourly_4 },
-    { value: "6", label: "60 + pessoas", disabled: !details.price_pp_hourly_5 },
+    { value: "1", label: `1 - 5 ${t('place.persons')}`, disabled: !details.price_pp_hourly_0 },
+    { value: "2", label: `6 - 15 ${t('place.persons')}`, disabled: !details.price_pp_hourly_1},
+    { value: "3", label: `16 - 30 ${t('place.persons')}`, disabled: !details.price_pp_hourly_2 },
+    { value: "4", label: `31 - 45 ${t('place.persons')}`, disabled: !details.price_pp_hourly_3 },
+    { value: "5", label: `46 - 60 ${t('place.persons')}`, disabled: !details.price_pp_hourly_4 },
+    { value: "6", label: `60 + ${t('place.persons')}`, disabled: !details.price_pp_hourly_5 },
   ];
 
   return (
@@ -26,7 +28,7 @@ const Select = ({ label, details }: SelectProps) => {
       <SelectLib
         options={options}
         onChange={handleChange}
-        placeholder="Selecione uma opção"
+        placeholder={t('place.select_one_option')}
         isOptionDisabled={(option) => option.disabled}
       />
     </>

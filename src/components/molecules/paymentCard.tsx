@@ -1,12 +1,15 @@
 import { IBooking, IOpeningHour, IPlace } from "@/commons/@types/place";
 import moment from "moment";
 import { useTranslations } from "next-intl";
-import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import {
+  IoInformationCircleOutline
+} from "react-icons/io5";
 import Button from "../atoms/Button";
 import DatePickerComponent from "../atoms/DatePicker";
 import Select from "../atoms/Select";
 import TimePickerComponent from "../atoms/TimePicker";
+
 
 interface PaymentCardProps {
   openingHours: IOpeningHour[];
@@ -104,51 +107,13 @@ export default function PaymentCard({
   place,
   isLoading,
 }: PaymentCardProps) {
-  if (isLoading) {
-    return (
-      <div className="w-full h-fit bg-white rounded-lg border-gray-200 top-20 border sticky p-6">
-        {/* Skeleton Loading for Price */}
-        <div className="h-6 bg-gray-300 mb-2 rounded w-1/2 mx-auto"></div>
-
-        {/* Skeleton Loading for Minimum */}
-        <div className="h-4 bg-gray-300 mb-4 w-3/4 mx-auto rounded"></div>
-
-        {/* Skeleton Loading for DatePickerComponent */}
-        <div className="mb-4 flex justify-start items-start flex-col text-left">
-          <div className="h-6 bg-gray-300 mb-2 rounded w-1/3"></div>
-          <div className="h-11 bg-gray-300 px-4 py-2 mt-2 w-full rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"></div>
-        </div>
-
-        {/* Skeleton Loading for TimePickerComponent */}
-        <div className="flex mb-2 gap-1">
-          <div className="h-10 bg-gray-300 w-full rounded"></div>
-          <div className="h-10 bg-gray-300 w-full rounded"></div>
-        </div>
-
-        {/* Skeleton Loading for TotalSelectedHours */}
-        <div className="w-full flex text-xs justify-end items-end text-gray-500 mb-2">
-          <div className="h-4 bg-gray-300 rounded w-1/3"></div>
-        </div>
-        {/* Skeleton Loading for Button */}
-        <div className="mt-4">
-          <div className="h-12 bg-gray-300 rounded w-full mx-auto"></div>
-        </div>
-        {/* Skeleton Loading for Total with Tax */}
-        <div className="mt-4 border-t border-gray-300 pt-2 flex justify-between">
-          <div className="h-6 bg-gray-300 rounded w-1/2"></div>
-          <div className="h-6 bg-gray-300 rounded w-1/4"></div>
-        </div>
-      </div>
-    );
-  } else {
-    return (
-      <PaymentCardComponent
-        openingHours={openingHours}
-        bookings={bookings}
-        place={place}
-      />
-    );
-  }
+  return (
+    <PaymentCardComponent
+      openingHours={openingHours}
+      bookings={bookings}
+      place={place}
+    />
+  );
 }
 
 function PaymentCardComponent({
@@ -157,7 +122,6 @@ function PaymentCardComponent({
   place,
 }: PaymentCardProps) {
   const t = useTranslations();
-  const params = useParams();
 
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedStartHour, setSelectedStartHour] = useState<Date | null>(null);
@@ -275,8 +239,8 @@ function PaymentCardComponent({
       {place.minimum && (
         <h2 className="text-xs text-gray-500 mb-2 text-center">
           {place.minimum > 1
-            ? `${place.minimum} horas de aluguel no mínimo`
-            : `${place.minimum} hora de aluguel no mínimo`}
+            ? `${place.minimum} ${t("place.minimums")}`
+            : `${place.minimum} ${t("place.minimum")}`}
         </h2>
       )}
 
@@ -286,7 +250,7 @@ function PaymentCardComponent({
           openingHours={openingHours}
           selectedDate={selectedDate}
           onChange={handleDateSelect}
-          label="Data / Hora"
+          label={t("place.date_hour")}
           onMonthChange={handleSelectedMonth}
           excludeDates={blockedDays}
         />
@@ -297,7 +261,7 @@ function PaymentCardComponent({
           selectedTime={selectedStartHour}
           excludedDays={removeHoursFromStartHour}
           openingHours={openingHours}
-          placeholder="Hora Inicial"
+          placeholder={t("place.initial_hour")}
           onChange={handleStartHourSelect}
           disabled={!selectedDate}
         />
@@ -306,23 +270,25 @@ function PaymentCardComponent({
           selectedTime={selectedEndHour}
           excludedDays={removeHoursFromEndHour}
           openingHours={openingHours}
-          placeholder="Hora Final"
+          placeholder={t("place.final_hour")}
           onChange={handleEndHourSelect}
           disabled={!selectedStartHour}
         />
       </div>
       <div className="flex justify-end w-full text-xs text-gray-500">
-        <p>Total de Horas: {totalSelectedHours}</p>
+        <p>
+          {t("place.total_hours")}: {totalSelectedHours}
+        </p>
       </div>
 
       {!disableCrew && (
         <div className="mb-4">
-          <Select label="Participantes" details={place.details} />
+          <Select label={t("place.crew")} details={place.details} />
         </div>
       )}
       <div className="mt-4">
         <Button onClick={() => {}} full rounded="md">
-          Continuar
+          {t('place.continue')}
         </Button>
       </div>
       {totalSelectedHours != 0 && (
@@ -331,15 +297,15 @@ function PaymentCardComponent({
             <p className="text-sm text-gray-800">
               {place.details.price_pp_hourly_0} x{" "}
               {totalSelectedHours > 1
-                ? `${totalSelectedHours} Horas`
-                : `${totalSelectedHours} Hora`}
+                ? `${totalSelectedHours} ${t('place.hours')}`
+                : `${totalSelectedHours} ${t('place.hour')}`}
             </p>
             <p className="text-sm text-gray-800 text-right">
               {monetary(totalPrice)}
             </p>
           </div>
           <div className="mt-2 flex justify-between">
-            <p className="text-sm text-gray-800">Taxa de serviço Icone</p>
+            <p className="text-sm w-full flex items-center gap-1 text-gray-800">{t('place.management_fee')} <IoInformationCircleOutline/></p>
             <p className="text-sm text-gray-800 text-right">
               {monetary(managementFee)}
             </p>
@@ -348,7 +314,7 @@ function PaymentCardComponent({
       )}
 
       <div className="mt-4 border-t border-gray-300 pt-2 flex justify-between">
-        <p className="text-lg text-gray-900">Total com taxas</p>
+        <p className="text-lg text-gray-900">{t('place.total_with_tax')}</p>
         <p className="text-lg font-bold text-gray-900 text-right">
           {monetary(totalWithTax)}
         </p>

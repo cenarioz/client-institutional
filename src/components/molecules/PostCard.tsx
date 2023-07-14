@@ -1,5 +1,6 @@
 import { IImage } from "@/commons/@types/place";
 import { useTranslations } from "next-intl";
+import { useEffect, useState } from "react";
 import { Carousel } from "react-responsive-carousel";
 
 interface CardProps {
@@ -7,18 +8,19 @@ interface CardProps {
   title: string;
   subtitle: string;
   value: number;
-  time: string;
   hate: number;
-  images: [IImage];
+  images: IImage[];
   type: string;
 }
 
-function multiFetcher(urls: any[]) {
-  return Promise.all(urls.map((url) => fetcher(url.path)));
+function multiFetcher(urls: string[]) {
+  return Promise.all(urls.map((url) => fetcher(url)));
 }
 
-const fetcher = (url: RequestInfo | URL) =>
-  fetch(url).then(async (r) => URL.createObjectURL(await r.blob()));
+const fetcher = (url: string) =>
+  fetch(url)
+    .then(async (r) => URL.createObjectURL(await r.blob()))
+    .catch(() => url);
 
 export const CardLoading = () => {
   return (
@@ -46,10 +48,11 @@ function Card({
   subtitle,
   value,
   type,
-  time,
   hate,
   images,
 }: CardProps) {
+  const [isLoading, setIsLoading] = useState(true);
+
   const settings = {
     showStatus: false,
     infiniteLoop: false,
@@ -60,28 +63,39 @@ function Card({
     swipeable: true,
     dynamicHeight: false,
   };
-  
+
+  useEffect(() => {
+    const urls = images.map((image) => image.path);
+    multiFetcher(urls)
+      .then(() => setIsLoading(false))
+      .catch((error) => console.error(error));
+  }, [images]);
+
   const t = useTranslations();
- 
+
   return (
     <div className="rounded overflow-hidden cursor-pointer">
       <div className="relative xs:h-80 h-60">
-        <Carousel {...settings}>
-          {images.map((image) => {
-            return (
-              <div
-                onClick={onClick}
-                key={image.path}
-                className="bg-cover w-full"
-                style={{
-                  backgroundImage: `url(${image.path})`,
-                  backgroundOrigin: "center",
-                  height: "240px",
-                }}
-              ></div>
-            );
-          })}
-        </Carousel>
+        {isLoading ? (
+          <div className="relative xs:h-80 h-60 bg-gray-300 rounded-xl"></div>
+        ) : (
+          <Carousel {...settings}>
+            {images.map((image) => {
+              return (
+                <div
+                  onClick={onClick}
+                  key={image.path}
+                  className="bg-cover w-full"
+                  style={{
+                    backgroundImage: `url(${image.path})`,
+                    backgroundOrigin: "center",
+                    height: "240px",
+                  }}
+                ></div>
+              );
+            })}
+          </Carousel>
+        )}
       </div>
       <div className="py-4" onClick={onClick}>
         <div className="flex flex-row justify-between gap-2">
@@ -93,7 +107,6 @@ function Card({
         </div>
 
         <p className="text-gray-500 text-sm">{subtitle}</p>
-        <p className="text-gray-500 text-sm">{time}</p>
         <p className="text-gray-900 text-sm">
           {new Intl.NumberFormat("pt-BR", {
             style: "currency",

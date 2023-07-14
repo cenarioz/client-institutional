@@ -1,5 +1,5 @@
 {
-  "title": "ola mundo!",
+  "title": "Olá mundo!",
   "navBar": {
     "advertiseYourSpace": "Anuncie seu espaço",
     "logIn": "Entrar",
@@ -11,27 +11,27 @@
     }
   },
   "search": {
-    "whatAreYouPlanning": "O que você está planejando",
+    "whatAreYouPlanning": "O que você está planejando?",
     "subTitle": "Produção • Gravação • Evento",
     "modal": {
-      "title": "Busca",
+      "title": "Buscar",
       "whatAreYouPlanning": "O que você está planejando?",
       "where": "Onde?",
       "when": "Quando?",
-      "howManyPeople": "Quantas Pessoas?",
-      "clear": "Limpar Tudo",
+      "howManyPeople": "Quantas pessoas?",
+      "clear": "Limpar tudo",
       "search": "Buscar"
     }
   },
   "filter": {
     "modal": {
-      "title": "Filtro",
-      "priceRange": "Faixa de Preço",
-      "priceRangeDescription": "O preço médio de locação é {value}, não incluindo as taxas ou os impostos.",
+      "title": "Filtrar",
+      "priceRange": "Faixa de preço",
+      "priceRangeDescription": "O preço médio de locação é {value}, não incluindo taxas ou impostos.",
       "keyword": "Palavra-chave",
       "minimumHours": "Mínimo de horas",
-      "clear": "Limpar Tudo",
-      "show": "Mostrar {value} cenarios"
+      "clear": "Limpar tudo",
+      "show": "Mostrar {value} cenários"
     }
   },
   "banner": {
@@ -42,24 +42,24 @@
     "title": "Por que escolher a Cenárioz",
     "subTitle": "Precisa de um espaço para dar vida às suas ideias? Nós podemos ajudá-lo a encontrar o lugar ideal para alugar.",
     "card1": {
-      "title": "Orçamento Fácil",
+      "title": "Orçamento fácil",
       "subTitle": "Reserve seu cenário e pague por hora, sem taxas ocultas de horas extras."
     },
     "card2": {
       "title": "Anfitriões experientes",
-      "subTitle": "Conecte-se com proprietários experientes para discutir estúdios, especificações técnicas e acomodações de talentos antes da chamada."
+      "subTitle": "Conecte-se com proprietários experientes para discutir estúdios, especificações técnicas e acomodações de talentos antes da reserva."
     },
     "card3": {
       "title": "Infinitas possibilidades",
-      "subTitle": "Encontre tudo, desde estúdios equipados profissionalmente até quartos e residências não convencionais."
+      "subTitle": "Encontre desde estúdios equipados profissionalmente até quartos e residências não convencionais."
     }
   },
   "ourWork": {
     "title": "Alguns de nossos trabalhos...",
-    "button1": "Estudio fotografico",
-    "button2": "Reuniao",
+    "button1": "Estúdio fotográfico",
+    "button2": "Reunião",
     "button3": "Evento",
-    "button4": "Gravação de Video",
+    "button4": "Gravação de vídeo",
     "button5": "Clipe musical",
     "button6": "Filmagem",
     "button7": "Sessão de fotos",
@@ -75,11 +75,11 @@
     "HOUR": "Hora",
     "DAY": "Dia",
     "MONTH": "Mês",
-    "parking_spots": "{value} vagas de estacionamento no local: Rua Estacionamento disponível ou estrutura de estacionamento nas proximidades. Por favor, confirme com o anfitrião.",
+    "parking_spots": "{value} vagas de estacionamento no local: estacionamento na rua disponível ou estrutura de estacionamento nas proximidades. Por favor, confirme com o anfitrião.",
     "elevator": "Elevador",
-    "freight_elevator": "Elevador de Carga",
+    "freight_elevator": "Elevador de carga",
     "stairs": "Escadas",
-    "street_level": "Terreo",
+    "street_level": "Térreo",
     "wheelchair": "Rampa para cadeirantes",
     "day_week": {
       "MONDAY": "Segunda-feira",
@@ -94,9 +94,36 @@
   "place": {
     "parking": "Estacionamento",
     "category/style": "Categoria e estilo",
-    "more": "Ver Mais",
-    "less": "Ver Menos",
+    "more": "Ver mais",
+    "less": "Ver menos",
     "opening_hours": "Horário de funcionamento",
-    "crew_access": "Acesso da Tripulação" 
+    "crew_access": "Acesso da equipe",
+    "information": "Informações",
+    "description": "Descrição do ambiente",
+    "about_place": "Sobre o espaço",
+    "details": "Detalhes do local",
+    "rules": "Regras",
+    "resources": "Recursos",
+    "facilities": "Facilidades",
+    "characteristics": "Características",
+    "minimum": "horas de aluguel no mínimo",
+    "minimums": "horas de aluguel no mínimo",
+    "date_hour": "Data / Hora",
+    "continue": "Continuar",
+    "total_with_tax": "Total",
+    "total_hours": "Total de horas",
+    "initial_hour": "Hora inicial",
+    "final_hour": "Hora final",
+    "crew": "Participantes",
+    "hour": "Hora",
+    "hours": "Horas",
+    "persons": "Pessoas",
+    "person": "Pessoa",
+    "select_one_option": "Selecione uma opção",
+    "management_fee": "Taxa de serviço",
+    "production": "Produção",
+    "event": "Evento",
+    "meeting": "Reunião",
+    "closed": "Fechado"
   }
 }

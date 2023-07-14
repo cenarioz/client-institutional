@@ -1,7 +1,7 @@
 {
   "title": "¡Hola mundo!",
   "navBar": {
-    "advertiseYourSpace": "Anunciar tu espacio",
+    "advertiseYourSpace": "Anuncia tu espacio",
     "logIn": "Iniciar sesión",
     "signUp": "Registrarse",
     "dropDown": {
@@ -14,7 +14,7 @@
     "whatAreYouPlanning": "¿Qué estás planeando?",
     "subTitle": "Producción • Grabación • Evento",
     "modal": {
-      "title": "Búsqueda",
+      "title": "Buscar",
       "whatAreYouPlanning": "¿Qué estás planeando?",
       "where": "¿Dónde?",
       "when": "¿Cuándo?",
@@ -25,9 +25,9 @@
   },
   "filter": {
     "modal": {
-      "title": "Filtro",
+      "title": "Filtrar",
       "priceRange": "Rango de precios",
-      "priceRangeDescription": "El precio promedio de alquiler es {value}, sin incluir tasas o impuestos.",
+      "priceRangeDescription": "El precio promedio de alquiler es {value}, sin incluir impuestos ni tarifas.",
       "keyword": "Palabra clave",
       "minimumHours": "Mínimo de horas",
       "clear": "Limpiar todo",
@@ -39,36 +39,91 @@
     "button": "Explorar"
   },
   "about": {
-    "title": "¿Por qué elegir Cenárioz?",
+    "title": "¿Por qué elegir Cenarioz?",
     "subTitle": "¿Necesitas un espacio para dar vida a tus ideas? Podemos ayudarte a encontrar el lugar perfecto para alquilar.",
     "card1": {
-      "title": "Presupuesto Fácil",
-      "subTitle": "Reserva tu escenario y paga por hora, sin cargos ocultos por horas extra."
+      "title": "Presupuesto fácil",
+      "subTitle": "Reserva tu escenario y paga por hora, sin tarifas ocultas por horas extras."
     },
     "card2": {
-      "title": "Anfitriones Experimentados",
-      "subTitle": "Conéctate con propietarios experimentados para discutir estudios, especificaciones técnicas y alojamientos para el talento antes de la sesión."
+      "title": "Anfitriones experimentados",
+      "subTitle": "Conéctate con propietarios experimentados para discutir estudios, especificaciones técnicas y alojamientos para talentos antes de reservar."
     },
     "card3": {
-      "title": "Infinitas Posibilidades",
+      "title": "Infinitas posibilidades",
       "subTitle": "Encuentra desde estudios equipados profesionalmente hasta habitaciones y residencias no convencionales."
     }
   },
   "ourWork": {
-    "title": "Algunos de Nuestros Trabajos...",
-    "button1": "Estudio Fotográfico",
+    "title": "Algunos de nuestros trabajos...",
+    "button1": "Estudio fotográfico",
     "button2": "Reunión",
     "button3": "Evento",
-    "button4": "Grabación de Video",
-    "button5": "Videoclip Musical",
+    "button4": "Grabación de video",
+    "button5": "Videoclip musical",
     "button6": "Filmación",
-    "button7": "Sesión de Fotos",
-    "button8": "Evento Corporativo",
+    "button7": "Sesión de fotos",
+    "button8": "Evento corporativo",
     "button9": "Fiesta"
   },
   "mission": {
-    "title": "Nuestra Misión",
-    "session1": "Cenárioz es una plataforma en línea que conecta a propietarios de propiedades con inquilinos que buscan filmar o realizar eventos en sus espacios. La plataforma permite a los inquilinos buscar ubicaciones para filmar, comunicarse con los propietarios y realizar pagos fácilmente, todo en un solo lugar.",
-    "session2": "El objetivo principal de Cenárioz es proporcionar a los inquilinos una plataforma para encontrar y reservar fácilmente lugares únicos para filmar y espacios para eventos de manera más accesible. Además, la plataforma brinda a los propietarios de propiedades una nueva oportunidad para mostrar sus propiedades y obtener ingresos adicionales."
+    "title": "Nuestra misión",
+    "session1": "Cenarioz es una plataforma en línea que conecta a propietarios de propiedades con inquilinos que desean filmar o realizar eventos en sus espacios. La plataforma permite a los inquilinos buscar lugares para filmar, comunicarse con los propietarios y realizar pagos de manera fácil, todo en un solo lugar.",
+    "session2": "El objetivo principal de Cenarioz es proporcionar a los inquilinos una plataforma para encontrar y reservar fácilmente lugares únicos para filmar y espacios para eventos de manera más asequible. Además, la plataforma ofrece a los propietarios de propiedades una nueva oportunidad para mostrar sus propiedades y obtener ingresos adicionales."
+  },
+  "enum": {
+    "HOUR": "Hora",
+    "DAY": "Día",
+    "MONTH": "Mes",
+    "parking_spots": "{value} lugares de estacionamiento disponibles en el lugar: estacionamiento en la calle o estructura de estacionamiento cercana. Por favor, confirma con el anfitrión.",
+    "elevator": "Ascensor",
+    "freight_elevator": "Ascensor de carga",
+    "stairs": "Escaleras",
+    "street_level": "Planta baja",
+    "wheelchair": "Rampa para silla de ruedas",
+    "day_week": {
+      "MONDAY": "Lunes",
+      "TUESDAY": "Martes",
+      "WEDNESDAY": "Miércoles",
+      "THURSDAY": "Jueves",
+      "FRIDAY": "Viernes",
+      "SATURDAY": "Sábado",
+      "SUNDAY": "Domingo"
+    }
+  },
+  "place": {
+    "parking": "Estacionamiento",
+    "category/style": "Categoría y estilo",
+    "more": "Ver más",
+    "less": "Ver menos",
+    "opening_hours": "Horario de apertura",
+    "crew_access": "Acceso para el equipo",
+    "information": "Información",
+    "description": "Descripción del entorno",
+    "about_place": "Sobre el espacio",
+    "details": "Detalles del lugar",
+    "rules": "Reglas",
+    "resources": "Recursos",
+    "facilities": "Instalaciones",
+    "characteristics": "Características",
+    "minimum": "horas de alquiler mínimo",
+    "minimums": "horas de alquiler mínimo",
+    "date_hour": "Fecha / Hora",
+    "continue": "Continuar",
+    "total_with_tax": "Total",
+    "total_hours": "Total de horas",
+    "initial_hour": "Hora inicial",
+    "final_hour": "Hora final",
+    "crew": "Participantes",
+    "hour": "Hora",
+    "hours": "Horas",
+    "persons": "Personas",
+    "person": "Persona",
+    "select_one_option": "Selecciona una opción",
+    "management_fee": "Tarifa de servicio",
+    "production": "Producción",
+    "event": "Evento",
+    "meeting": "Reunión",
+    "closed": "Cerrado"
   }
 }

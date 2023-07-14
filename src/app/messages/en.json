@@ -1,9 +1,9 @@
 {
   "title": "Hello world!",
   "navBar": {
-    "advertiseYourSpace": "Advertise your space",
-    "logIn": "Log in",
-    "signUp": "Sign up",
+    "advertiseYourSpace": "Advertise Your Space",
+    "logIn": "Log In",
+    "signUp": "Sign Up",
     "dropDown": {
       "portuguese": "Portuguese",
       "english": "English",
@@ -19,7 +19,7 @@
       "where": "Where?",
       "when": "When?",
       "howManyPeople": "How many people?",
-      "clear": "Clear All",
+      "clear": "Clear all",
       "search": "Search"
     }
   },
@@ -27,10 +27,10 @@
     "modal": {
       "title": "Filter",
       "priceRange": "Price Range",
-      "priceRangeDescription": "The average rental price is {value}, not including fees or taxes.",
+      "priceRangeDescription": "The average rental price is {value}, not including taxes or fees.",
       "keyword": "Keyword",
       "minimumHours": "Minimum hours",
-      "clear": "Clear All",
+      "clear": "Clear all",
       "show": "Show {value} scenarios"
     }
   },
@@ -39,53 +39,91 @@
     "button": "Explore"
   },
   "about": {
-    "title": "Why Choose Cenárioz",
+    "title": "Why choose Cenarioz",
     "subTitle": "Need a space to bring your ideas to life? We can help you find the perfect place to rent.",
     "card1": {
-      "title": "Easy Budgeting",
-      "subTitle": "Book your set and pay per hour, with no hidden fees for overtime."
+      "title": "Easy budgeting",
+      "subTitle": "Book your scenario and pay per hour, with no hidden fees for overtime."
     },
     "card2": {
-      "title": "Experienced Hosts",
-      "subTitle": "Connect with experienced owners to discuss studios, technical specifications, and talent accommodations before the shoot."
+      "title": "Experienced hosts",
+      "subTitle": "Connect with experienced property owners to discuss studios, technical specifications, and talent accommodations before booking."
     },
     "card3": {
-      "title": "Infinite Possibilities",
+      "title": "Infinite possibilities",
       "subTitle": "Find everything from professionally equipped studios to unconventional rooms and residences."
     }
   },
   "ourWork": {
-    "title": "Some of Our Work...",
+    "title": "Some of our work...",
     "button1": "Photography Studio",
     "button2": "Meeting",
     "button3": "Event",
     "button4": "Video Recording",
     "button5": "Music Video",
     "button6": "Filming",
-    "button7": "Photo Session",
+    "button7": "Photo Shoot",
     "button8": "Corporate Event",
     "button9": "Party"
   },
   "mission": {
     "title": "Our Mission",
-    "session1": "Cenárioz is an online platform that connects property owners with renters looking to film or host events in their spaces. The platform allows renters to search for filming locations, communicate with owners, and easily make payments, all in one place.",
-    "session2": "The main goal of Cenárioz is to provide renters with a platform to easily find and book unique filming locations and event spaces in a more affordable way. Additionally, the platform offers property owners a new opportunity to showcase their properties and earn additional income."
+    "session1": "Cenarioz is an online platform that connects property owners with tenants who want to film or hold events in their spaces. The platform allows tenants to search for filming locations, communicate with owners, and easily make payments, all in one place.",
+    "session2": "The main goal of Cenarioz is to provide tenants with a platform to easily find and book unique filming locations and event spaces at a more affordable price. Additionally, the platform offers property owners a new opportunity to showcase their properties and earn additional income."
   },
   "enum": {
     "HOUR": "Hour",
     "DAY": "Day",
     "MONTH": "Month",
-    "parking_spots": "{value} parking spots: Street parking available or parking structure nearby. Please confirm with the host.",
+    "parking_spots": "{value} parking spots available on-site: Street parking or nearby parking structure. Please confirm with the host.",
     "elevator": "Elevator",
     "freight_elevator": "Freight Elevator",
     "stairs": "Stairs",
     "street_level": "Street Level",
-    "wheelchair": "Wheel Chair Ramp"
+    "wheelchair": "Wheelchair Ramp",
+    "day_week": {
+      "MONDAY": "Monday",
+      "TUESDAY": "Tuesday",
+      "WEDNESDAY": "Wednesday",
+      "THURSDAY": "Thursday",
+      "FRIDAY": "Friday",
+      "SATURDAY": "Saturday",
+      "SUNDAY": "Sunday"
+    }
   },
   "place": {
     "parking": "Parking",
-    "category/style":"Category e style",
+    "category/style": "Category and Style",
     "more": "See More",
-    "less": "See Less"
+    "less": "See Less",
+    "opening_hours": "Opening Hours",
+    "crew_access": "Crew Access",
+    "information": "Information",
+    "description": "Environment Description",
+    "about_place": "About the Space",
+    "details": "Location Details",
+    "rules": "Rules",
+    "resources": "Resources",
+    "facilities": "Facilities",
+    "characteristics": "Characteristics",
+    "minimum": "minimum rental hours",
+    "minimums": "minimum rental hours",
+    "date_hour": "Date / Time",
+    "continue": "Continue",
+    "total_with_tax": "Total",
+    "total_hours": "Total Hours",
+    "initial_hour": "Initial Hour",
+    "final_hour": "Final Hour",
+    "crew": "Participants",
+    "hour": "Hour",
+    "hours": "Hours",
+    "persons": "People",
+    "person": "Person",
+    "select_one_option": "Select an option",
+    "management_fee": "Service Fee",
+    "production": "Production",
+    "event": "Event",
+    "meeting": "Meeting",
+    "closed": "Closed"
   }
 }

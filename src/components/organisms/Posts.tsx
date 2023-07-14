@@ -67,7 +67,6 @@ const Posts = () => {
                   onClick={() => handleClick(post.id)}
                   title={`${post.address.city}, ${post.address.state}`}
                   subtitle={post.title}
-                  time={"diponibilidae"}
                   value={post.value}
                   type={post.value_type}
                   hate={post.rating}

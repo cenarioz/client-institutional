@@ -82,12 +82,12 @@ function PostBody({ place }: PostBodyProps) {
     },
 
     placeSizes?.length > 0 && {
-      title: "Detalhes do local",
+      title: t("place.details"),
       description: placeSizes.join(", "),
     },
 
     place.rules?.length > 0 && {
-      title: "Regras de localização",
+      title: t("place.rules"),
       description: place.rules
         .map((rule) => {
           return rule.name;
@@ -96,7 +96,7 @@ function PostBody({ place }: PostBodyProps) {
     },
 
     place.features?.length > 0 && {
-      title: "Recursos",
+      title: t("place.resources"),
       description: place.features
         .map((feature) => {
           return feature.name;
@@ -105,7 +105,7 @@ function PostBody({ place }: PostBodyProps) {
     },
 
     place.amenities?.length > 0 && {
-      title: "Facilidades",
+      title: t("place.facilities"),
       description: place.amenities
         .map((amenity) => {
           return amenity.name;
@@ -114,7 +114,7 @@ function PostBody({ place }: PostBodyProps) {
     },
 
     {
-      title: "Características",
+      title: t("place.characteristics"),
       description:
         "Piso de carpete\nPiso de concreto\nParedes de tijolo\nParedes de textura\nparedes brancas\nJanelas do chão ao teto",
     },
@@ -138,7 +138,7 @@ function PostBody({ place }: PostBodyProps) {
                 <div>
                   {openHour?.active
                     ? `${openHour?.opening_time} - ${openHour?.closing_time}`
-                    : "fechado"}
+                    : t('place.closed')}
                 </div>
               </div>
             );
@@ -159,15 +159,19 @@ function PostBody({ place }: PostBodyProps) {
   const info = [
     {
       icon: <IoTimeOutline />,
-      name: `${place?.minimum > 1 ? `${place?.minimum} Horas` : "1 Hora"}`,
+      name: `${
+        place?.minimum > 1
+          ? `${place?.minimum} ${t("place.hours")}`
+          : `1 ${t("place.hour")}`
+      }`,
       disabled: !place?.minimum,
     },
     {
       icon: <IoPeopleOutline />,
       name: `${
         place?.details?.max_attendees > 1
-          ? `${place?.details?.max_attendees} Pessoas`
-          : `1 Pessoa`
+          ? `${place?.details?.max_attendees} ${t("place.persons")}`
+          : `1 ${t("place.person")}`
       }`,
       disabled: !place?.details?.max_attendees,
     },
@@ -178,17 +182,17 @@ function PostBody({ place }: PostBodyProps) {
     },
     {
       icon: <IoVideocamOutline />,
-      name: "Produção",
+      name: t("place.production"),
       disabled: !place?.details?.production,
     },
     {
       icon: <IoBalloonOutline />,
-      name: "Evento",
+      name: t("place.event"),
       disabled: !place?.details?.event,
     },
     {
       icon: <IoCafeOutline />,
-      name: "Reunião",
+      name: t("place.meeting"),
       disabled: !place?.details?.meeting,
     },
   ];
@@ -196,9 +200,9 @@ function PostBody({ place }: PostBodyProps) {
   return (
     <div className="flex py-16">
       <div className="w-2/3">
-        <h1 className="text-xl font-medium mb-5">Informações</h1>
+        <h1 className="text-xl font-medium mb-5">{t("place.information")}</h1>
         <Categories props={info} />
-        <h1 className="text-xl font-medium mb-5">Descrição do Ambiente</h1>
+        <h1 className="text-xl font-medium mb-5">{t("place.description")}</h1>
         <p className="text-base">
           {!more ? truncate(place.description) : place.description}
         </p>
@@ -213,7 +217,7 @@ function PostBody({ place }: PostBodyProps) {
         <Divisor></Divisor>
 
         <div className="mt-5">
-          <h1 className="text-xl font-medium mb-5">Sobre o Espaço</h1>
+          <h1 className="text-xl font-medium mb-5">{t("place.about_place")}</h1>
           {property.map((item: { title: string; description: string }) => {
             return (
               <Property

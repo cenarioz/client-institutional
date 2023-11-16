@@ -138,7 +138,7 @@ function PostBody({ place }: PostBodyProps) {
                 <div>
                   {openHour?.active
                     ? `${openHour?.opening_time} - ${openHour?.closing_time}`
-                    : t('place.closed')}
+                    : t("place.closed")}
                 </div>
               </div>
             );
@@ -244,12 +244,12 @@ function PostBody({ place }: PostBodyProps) {
           <div className="flex flex-col justify-center">
             <p className="font-bold">{place.host.user.name}</p>
             <p className="font-normal text-sm text-gray-500">
-              <span className="font-medium">Response rating: </span>
-              {place.host.response_rating}
+              <span className="font-medium">{t("place.host_rating")}: </span>
+              {responseRating(place.host.response_rating)}
             </p>
             <p className="font-normal  text-sm  text-gray-500">
-              <span className="font-medium">Response time:</span>{" "}
-              {place.host.time_rating}
+              <span className="font-medium">{t("place.response_time")}:</span>{" "}
+              {responseTimeRating(place.host.time_rating)}
             </p>
           </div>
         </div>
@@ -265,6 +265,23 @@ function PostBody({ place }: PostBodyProps) {
       </div>
     </div>
   );
+}
+
+function responseRating(rating: number) {
+  if (rating === 0) return "Ruim";
+  if (rating > 4) return "Exelente";
+  if (rating > 3) return "Ótima";
+  if (rating > 1) return "Boa";
+
+  return "Ruim";
+}
+function responseTimeRating(rating: number) {
+  if (rating === 0) return "Demora Para Responder";
+  if (rating > 4) return "Em poucos minutos";
+  if (rating > 3) return "Em poucas horas";
+  if (rating > 1) return "Em um ou mais dias";
+
+  return "Ruim";
 }
 
 export default PostBody;

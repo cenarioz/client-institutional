@@ -124,6 +124,7 @@ function PaymentCardComponent({
   const t = useTranslations();
 
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [selectedParticipants, setSelectedParticipants] = useState<any>(null);
   const [selectedStartHour, setSelectedStartHour] = useState<Date | null>(null);
   const [selectedEndHour, setSelectedEndHour] = useState<Date | null>(null);
   const [selectedMonth, setSelectedMonth] = useState<Date | null>(null);
@@ -173,7 +174,7 @@ function PaymentCardComponent({
   const startOfStartHour = moment(bookinsOfDay[0]).subtract(1, "hour");
   const endOfStartHour = moment(bookinsOfDay[bookinsOfDay.length - 1]);
 
-  const totalPrice = place.details.price_pp_hourly_0 * totalSelectedHours;
+  const totalPrice = (selectedParticipants ?? place.details.price_pp_hourly_0) * totalSelectedHours;
   const managementFee = (9.5 / 100) * totalPrice;
   const totalWithTax = totalPrice + managementFee;
 
@@ -225,6 +226,9 @@ function PaymentCardComponent({
   const handleEndHourSelect = (date: Date | null) => {
     setSelectedEndHour(date);
   };
+  const handleSelectParticipants = (data: any | null) => {
+    setSelectedParticipants(data);
+  };
   const handleSelectedMonth = (date: Date | null) => {
     setSelectedMonth(date);
     setblockedDays([...blockedDays, ...disabledDayOfWeek(date)]);
@@ -233,7 +237,7 @@ function PaymentCardComponent({
   return (
     <div className="w-full h-fit bg-white rounded-lg border-gray-200 top-20 border sticky p-6">
       <h1 className="text-lg text-center">
-        {monetary(place.details.price_pp_hourly_0)}/{" "}
+        {monetary(selectedParticipants ?? place.details.price_pp_hourly_0)}/{" "}
         {t(`enum.${place.value_type}`)}
       </h1>
       {place.minimum && (
@@ -283,7 +287,7 @@ function PaymentCardComponent({
 
       {!disableCrew && (
         <div className="mb-4">
-          <Select label={t("place.crew")} details={place.details} />
+          <Select label={t("place.crew")} onChange={handleSelectParticipants} details={place.details} />
         </div>
       )}
       <div className="mt-4">
@@ -295,7 +299,7 @@ function PaymentCardComponent({
         <div>
           <div className="mt-4 pt-2 flex justify-between">
             <p className="text-sm text-gray-800">
-              {place.details.price_pp_hourly_0} x{" "}
+              {monetary(selectedParticipants ?? place.details.price_pp_hourly_0)} x{" "}
               {totalSelectedHours > 1
                 ? `${totalSelectedHours} ${t('place.hours')}`
                 : `${totalSelectedHours} ${t('place.hour')}`}

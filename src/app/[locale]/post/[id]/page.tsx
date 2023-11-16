@@ -5,7 +5,7 @@ import Divisor from "@/components/atoms/Divisor";
 import Nav from "@/components/molecules/Navbar";
 import PostBody from "@/components/organisms/PostBody";
 import PostHeader from "@/components/organisms/PostHeader";
-import { fetcher } from "@/utils/api";
+import { fetcher } from "@/utils/place.api";
 import { gql } from "graphql-request";
 import { useParams } from "next/navigation";
 import useSWR from "swr";
@@ -70,7 +70,7 @@ export default function Post() {
     }`,
     fetcher
   );
-  
+
   const { data: bookingData, error: bookingError } = useSWR<any>(
     gql`{
       place(id: ${params.id}) {

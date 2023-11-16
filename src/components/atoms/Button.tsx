@@ -74,7 +74,7 @@ export default function Button({
       onClick={onClick}
       className={`${
         full && "w-full"
-      } w-12 h-12 flex text-center justify-center items-center ${roundedBorder()} ${defineBorder()} transition-colors duration-300 ease-in-out focus:outline-none`}
+      } w-12 h-11 flex text-center justify-center items-center ${roundedBorder()} ${defineBorder()} transition-colors duration-300 ease-in-out focus:outline-none`}
       style={defineBg()}
     >
       {children}

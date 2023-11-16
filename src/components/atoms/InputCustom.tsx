@@ -1,22 +1,10 @@
-import React, { ChangeEvent, useState } from "react";
+import { useState } from "react";
+import { IoAlertCircle } from "react-icons/io5";
 
-interface Props {
-  label: string;
-  type: string;
-  value: string;
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  placeholder?: string;
-}
-
-const InputWithLabel: React.FC<Props> = ({
-  label,
-  value,
-  onChange,
-  placeholder,
-  type,
-}) => {
+const CustomInput = ({ field, form, ...props }: any) => {
   const [isFocused, setIsFocused] = useState(false);
-
+  const [showPassword, setShowPassword] = useState(false);
+  const { type, ...rest } = props;
   const handleFocus = () => {
     setIsFocused(true);
   };
@@ -25,20 +13,26 @@ const InputWithLabel: React.FC<Props> = ({
     setIsFocused(false);
   };
 
+  const handlePassword = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
-    <>
+    <div>
       <div
         className="cursor-text w-full rounded-md"
         style={{
           boxShadow:
-            isFocused || value
+            form.touched[field.name] && form.errors[field.name]
+              ? "inset 0 0 0 1px #f97316"
+              : isFocused || field.value
               ? "inset 0 0 0 2px #222"
               : "inset 0 0 0 1px #B0B0B0",
         }}
       >
         <label className="relative flex-1">
           <div
-            className="text-gray-500"
+            className="text-gray-500 flex justify-between"
             style={{
               position: "absolute",
               top: "16px",
@@ -57,7 +51,9 @@ const InputWithLabel: React.FC<Props> = ({
               transition:
                 "transform 0.15s cubic-bezier(0.455,0.03,0.515,0.955)",
               transform:
-                isFocused || value ? "translateY(-8px) scale(0.75)" : "none",
+                isFocused || field.value
+                  ? "translateY(-8px) scale(0.75)"
+                  : "none",
             }}
           >
             <div
@@ -67,18 +63,42 @@ const InputWithLabel: React.FC<Props> = ({
                 textOverflow: "ellipsis",
                 whiteSpace: "nowrap",
               }}
+              className={`${
+                form.touched[field.name] && form.errors[field.name]
+                  ? "text-orange-500"
+                  : ""
+              }`}
             >
-              {label}
+              {props.label}
             </div>
           </div>
+          {props.type === "password" && (
+            <button
+              type="button"
+              className="text-xs underline absolute right-4 top-5 cursor-pointer hover:text-gray-500"
+              onClick={handlePassword}
+            >
+              {showPassword ? "Ocultar" : "Exibir"}
+            </button>
+          )}
+
           <div>
             <div
               className={`flex ${
-                isFocused || value ? "opacity-1" : "opacity-0"
+                isFocused || field.value ? "opacity-1" : "opacity-0"
               }`}
             >
               <input
-                type={type}
+                value={field.value || ""}
+                type={
+                  props.type === "password" && showPassword
+                    ? "text"
+                    : props.type === "password" && !showPassword
+                    ? "password"
+                    : props.type
+                }
+                {...field}
+                {...rest}
                 id="input-field"
                 style={{
                   width: "100%",
@@ -86,7 +106,6 @@ const InputWithLabel: React.FC<Props> = ({
                   outline: "none",
                   padding: "0px",
                   margin: "26px 12px 6px",
-                  color: "inherit",
                   backgroundColor: "transparent",
                   fontFamily: "inherit",
                   fontSize: "inherit",
@@ -94,18 +113,26 @@ const InputWithLabel: React.FC<Props> = ({
                   lineHeight: "inherit",
                   appearance: "none",
                 }}
+                className="text-gray-900"
                 onFocus={handleFocus}
                 onBlur={handleBlur}
-                value={value}
-                onChange={onChange}
-                placeholder={placeholder}
               />
             </div>
           </div>
         </label>
       </div>
-    </>
+      {form.touched[field.name] && form.errors[field.name] ? (
+        <div className="text-orange-500 text-xs flex items-center gap-1 mt-2">
+          <IoAlertCircle size={20} />
+          {form.errors[field.name]}
+        </div>
+      ) : props.info ? (
+        <p className="text-xs font-normal text-gray-500 mt-2">{props.info}</p>
+      ) : (
+        ""
+      )}
+    </div>
   );
 };
 
-export default InputWithLabel;
+export default CustomInput;

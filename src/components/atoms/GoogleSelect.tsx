@@ -1,24 +1,39 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import PlacesAutocomplete, {
   geocodeByAddress,
-  getLatLng
+  getLatLng,
 } from "react-places-autocomplete";
 
-class FormikPlacesAutoComplete extends Component {
-  constructor(props) {
+interface GoogleI {
+  field: {
+    name: string;
+  };
+  value: string;
+  form: any;
+  classes: any;
+  label: any;
+}
+
+interface FormikPlacesAutoCompleteState {
+  name: string;
+  address: string;
+}
+
+class FormikPlacesAutoComplete extends Component<GoogleI, FormikPlacesAutoCompleteState> {
+  constructor(props: GoogleI) {
     super(props);
 
     this.state = {
       name: props.field.name,
-      address: props.value || ""
+      address: props.value || "",
     };
   }
 
-  handleError = error => {
+  handleError = (error: any) => {
     this.props.form.setFieldError(this.state.name, error);
   };
 
-  handleChange = address => {
+  handleChange = (address: string) => {
     this.setState(() => {
       this.props.form.setFieldTouched(`${this.state.name}.value`);
       this.props.form.setFieldTouched(`${this.state.name}.address`);
@@ -27,20 +42,20 @@ class FormikPlacesAutoComplete extends Component {
     });
   };
 
-  handleSelect = address => {
+  handleSelect = (address: string) => {
     geocodeByAddress(address)
-      .then(results => getLatLng(results[0]))
-      .then(latLng => {
+      .then((results) => getLatLng(results[0]))
+      .then((latLng) => {
         this.setState(() => {
           this.props.form.setFieldValue(this.state.name, {
             value: address,
             address,
-            coordinates: latLng
+            coordinates: latLng,
           });
           return { address };
         });
       })
-      .catch(error => this.props.form.setFieldError(this.state.name, error));
+      .catch((error) => this.props.form.setFieldError(this.state.name, error));
   };
 
   render() {
@@ -57,8 +72,6 @@ class FormikPlacesAutoComplete extends Component {
     console.log(this.state);
     return (
       <PlacesAutocomplete
-        name={name}
-        id={name}
         {...props}
         value={this.state.address}
         onChange={this.handleChange}
@@ -70,12 +83,12 @@ class FormikPlacesAutoComplete extends Component {
             <input
               {...getInputProps({
                 placeholder: "Search Places ...",
-                className: "location-search-input form-control"
+                className: "location-search-input form-control",
               })}
             />
             <div className="autocomplete-dropdown-container">
               {loading && <div>Loading...</div>}
-              {suggestions.map(suggestion => {
+              {suggestions.map((suggestion) => {
                 const className = suggestion.active
                   ? "suggestion-item--active"
                   : "suggestion-item";
@@ -84,10 +97,11 @@ class FormikPlacesAutoComplete extends Component {
                   ? { backgroundColor: "#fafafa", cursor: "pointer" }
                   : { backgroundColor: "#ffffff", cursor: "pointer" };
                 return (
+                  // eslint-disable-next-line react/jsx-key
                   <div
                     {...getSuggestionItemProps(suggestion, {
                       className,
-                      style
+                      style,
                     })}
                   >
                     <span>{suggestion.description}</span>

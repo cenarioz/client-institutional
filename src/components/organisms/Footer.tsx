@@ -5,11 +5,14 @@ import { IoGlobeOutline, IoLogoFacebook, IoLogoInstagram, IoLogoTwitter, IoMap }
 import Dropdown from "../atoms/Dropdown";
 import { usePathname, useRouter } from "next/navigation";
 import { getCookie } from "@/utils/helper";
+import { useEffect, useState } from "react";
 
 const Footer = () => {
   const router = useRouter();
   const path = usePathname();
   const t = useTranslations();
+
+  const [selectedLanguage, setSelectedLanguage] = useState({ value: "pt-BR", label: t("navBar.dropDown.portuguese") })
 
 
 
@@ -19,32 +22,35 @@ const Footer = () => {
     { value: "es", label: t("navBar.dropDown.spanish") },
   ];
 
-  const selectedLanguage = languages.find(language => language.value === getCookie('NEXT_LOCALE') ?? 'pt-BR')
-
-  getCookie('NEXT_LOCALE') ?? 'pt-BR'
-
   const handleSelect = (value: string) => {
     router.push(`${value}/${path.replace("en", "").replace("es", "")}`);
     router.refresh();
   };
+
+  useEffect(() => {
+    const language = languages.find(language => language.value === getCookie('NEXT_LOCALE') ?? 'pt-BR')
+    if (language) {
+      setSelectedLanguage(language)
+    }
+  }, []);
   return (
     <>
       <div className="relative bg-zinc-100 -mt-16 ">
         <div className="w-full">
           <div className="container mx-auto grid px-4 xs:grid-cols-1 grid-cols-4 gap-4 pt-10 pb-20">
             <ul>
-              <th>Atendimento</th>
+              <li><strong>Atendimento</strong></li>
               <li>Central de Ajuda</li>
 
             </ul>
             <ul>
-              <th>Hospedagem</th>
+              <li><strong>Hospedagem</strong></li>
               <li>Anuncie seu espaço</li>
               <li>Quero alugar</li>
             </ul>
             <ul>
 
-              <th>Cenarioz</th>
+              <li><strong>Cenarioz</strong></li>
               <li>Porque nós</li>
               <li>Nossos trabalhos</li>
               <li>Nossa missão</li>
@@ -116,11 +122,11 @@ const Footer = () => {
             <p>
               © 2023 Cenarioz, Inc
             </p>
-            <p className="flex xs:flex-col md:gap-8 xs:gap-2 md:items-center md:content-center">
+            <div className="flex xs:flex-col md:gap-8 xs:gap-2 md:items-center md:content-center">
               <Dropdown key={"dropdown"} items={languages} onSelect={handleSelect}>
                 <div className="flex gap-2 items-center content-center">
                   <IoGlobeOutline size={22} />
-                  {selectedLanguage?.label}
+                  <p>{selectedLanguage?.label}</p>
                 </div>
 
               </Dropdown>
@@ -129,7 +135,7 @@ const Footer = () => {
                 <IoLogoInstagram size={22} />
                 <IoLogoTwitter size={22} />
               </span>
-            </p>
+            </div>
           </div>
         </div>
       </div>

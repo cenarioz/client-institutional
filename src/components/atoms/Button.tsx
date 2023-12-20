@@ -1,7 +1,5 @@
 "use-client";
 import { ReactNode, useState } from "react";
-import colorst from "tailwindcss/colors";
-import tailwindConfig from "../../../tailwind.config.js";
 
 interface ButtonProps {
   onClick: () => void;
@@ -44,8 +42,7 @@ export default function Button({
     else return `bg-${color} text-white`;
   };
 
-  const { colors } = tailwindConfig.theme.extend;
-  const tColors: any = { ...colorst, ...colors };
+  const tColors: any = {};
 
   const defineColor = () => {
     const colorAndIntensity: any = color.split("-");
@@ -72,9 +69,8 @@ export default function Button({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={onClick}
-      className={`${
-        full && "w-full"
-      } w-12 h-11 flex text-center justify-center items-center ${roundedBorder()} ${defineBorder()} transition-colors duration-300 ease-in-out focus:outline-none`}
+      className={`${full && "w-full"
+        } w-12 h-11 flex text-center justify-center items-center ${roundedBorder()} ${defineBorder()} transition-colors duration-300 ease-in-out focus:outline-none`}
       style={defineBg()}
     >
       {children}

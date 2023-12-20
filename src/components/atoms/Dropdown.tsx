@@ -1,5 +1,5 @@
 import React, { ReactNode, useEffect, useRef, useState } from "react";
-
+import { createPopper } from '@popperjs/core';
 interface DropdownItem {
   value: string;
   label: string;
@@ -15,6 +15,21 @@ const Dropdown: React.FC<DropdownProps> = ({ children, items, onSelect }) => {
   const [selectedItem, setSelectedItem] = useState<DropdownItem | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const referenceRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (referenceRef.current && dropdownRef.current) {
+      const popper = createPopper(referenceRef.current as Element, dropdownRef.current, {
+        placement: 'bottom-start', // ou qualquer outra posição desejada
+      });
+
+      return () => {
+        popper.destroy();
+      };
+    }
+
+    return undefined;
+  }, [isOpen]);
 
   const handleSelect = (item: DropdownItem) => {
     setSelectedItem(item);
@@ -43,35 +58,23 @@ const Dropdown: React.FC<DropdownProps> = ({ children, items, onSelect }) => {
     };
   }, []);
 
-  useEffect(() => {
-    const handleResize = () => {
-      setIsOpen(false);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
   return (
-    <div className="dropdown" ref={dropdownRef}>
-      <button
-        className="hover:opacity-50"
-        type="button"
-        onClick={toggleDropdown}
-      >
-        {children}
-      </button>
+    <div>
+      <div ref={referenceRef}>
+        <button onClick={toggleDropdown}>
+          {children}
+        </button>
+      </div>
+
       {isOpen && (
-        <ul className="dropdown-menu text-black text-sm">
+        <div ref={dropdownRef} className="dropdown-menu text-black text-sm">
           {items.map((item) => (
             <li key={item.value} onClick={() => handleSelect(item)}>
               {item.label}
             </li>
           ))}
-        </ul>
+          <div id="arrow" data-popper-arrow></div>
+        </div>
       )}
     </div>
   );

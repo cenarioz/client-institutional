@@ -507,25 +507,26 @@ export default function Search({ size = "sm", className }: SearchProps) {
                 name="howManyPeople"
                 component={CustomInput}
               />
+              <Modal.footer>
+                <div className="flex flex-row justify-between">
+                  <ButtonFull
+                    textColor={"text-gray-900"}
+                    bgColor="bg-transparent"
+                    rounded
+                    onClick={handleReset}
+                    type="reset"
+                    isLoading={false}
+                    value={t("search.modal.clear")}
+                  ></ButtonFull>
 
-              <div className="flex flex-row justify-between pt-6 mt-6 mb-6">
-                <ButtonFull
-                  textColor={"text-gray-900"}
-                  bgColor="bg-transparent"
-                  rounded
-                  onClick={handleReset}
-                  type="reset"
-                  isLoading={false}
-                  value={t("search.modal.clear")}
-                ></ButtonFull>
-
-                <ButtonFull
-                  bgColor="bg-gray-900"
-                  rounded
-                  isLoading={false}
-                  value={t("search.modal.search")}
-                ></ButtonFull>
-              </div>
+                  <ButtonFull
+                    bgColor="bg-gray-900"
+                    rounded
+                    isLoading={false}
+                    value={t("search.modal.search")}
+                  ></ButtonFull>
+                </div>
+              </Modal.footer>
             </div>
           </Form>
         </Formik>
@@ -605,9 +606,8 @@ export default function Search({ size = "sm", className }: SearchProps) {
       </Modal>
 
       <div
-        className={`bg-white w-1/2 min-w-[350px] rounded-full flex items-center border border-gray-300 justify-between ${
-          size === "xs" ? "pl-4 pr-0.5 py-0.5" : "pl-6 pr-2 py-2"
-        } cursor-pointer ${className}`}
+        className={`bg-white w-1/2 min-w-[350px] rounded-full flex items-center border border-gray-300 justify-between ${size === "xs" ? "pl-4 pr-0.5 py-0.5" : "pl-6 pr-2 py-2"
+          } cursor-pointer ${className}`}
       >
         <IoSearch color="black" className="pr-1" size={25} />
         <div onClick={handler} className="ml-2 flex-1">

@@ -91,13 +91,13 @@ const Modal: React.FC<ModalProps> & { footer: React.FC<ModalFooterProps> } = ({
       ></div>
 
       <section>
-        <div className="z-[2000] left-0 right-0 pt-10  fixed top-0 bottom-0 flex flex-row items-center justify-center max-h-[calc(4.56px,1vh * 100)]">
+        <div className="z-[2000] left-0 right-0 pt-10  fixed top-0 bottom-0 flex flex-row md:items-center md:justify-center max-h-[calc(4.56px,1vh * 100)]">
           <div className="contents">
             <div className="p-0 -mt-px" aria-hidden="true"></div>
             <div className="contents">
               <div
                 ref={modalRef}
-                className="bg-white rounded-md relative overflow-clip w-screen flex flex-col max-h-full max-w-xl text-gray-900"
+                className="bg-white rounded-md relative overflow-clip w-screen flex flex-col max-h-full md:max-w-xl text-gray-900"
               >
                 {!hiddenHeader && (
                   <>
@@ -128,9 +128,9 @@ const Modal: React.FC<ModalProps> & { footer: React.FC<ModalFooterProps> } = ({
 
                 <div className="h-auto overflow-y-auto pl-6 pr-6">
                   <div>{children}</div>
-                  <Modal.footer>
-                    {/* Conteúdo do rodapé do modal */}
-                  </Modal.footer>
+                  {/* <Modal.footer>
+            
+                  </Modal.footer> */}
                 </div>
               </div>
             </div>
@@ -145,7 +145,7 @@ const Modal: React.FC<ModalProps> & { footer: React.FC<ModalFooterProps> } = ({
 
 Modal.footer = ({ children }) => {
   return (
-    <div className="modal-footer xs:absolute xs:bottom-8 xs:right-0 xs:left-0 xs:px-3">
+    <div className="xs:fixed xs:bottom-4 xs:right-0 xs:left-0 xs:px-6 md:pt-12 md:pb-4">
       {children}
     </div>
   );

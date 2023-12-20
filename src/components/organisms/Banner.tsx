@@ -12,12 +12,6 @@ const Banner = () => {
       <div className="relative -mt-16 bg-cover bg-center pt-24 pb-20" style={{ backgroundImage: `url('/banner.jpeg')` }}>
         <div className="flex flex-col top-1/3 left-0 w-full items-center ">
           <div className="flex container mx-auto px-4 text-white align-middle justify-center">
-            {/* <Image
-              src="/banner.jpeg" // Caminho relativo ao diretório public
-              alt="Descrição da imagem"
-              layout="fill"
-              objectFit="cover"
-            /> */}
             <Search />
           </div>
           <div className="container mx-auto px-4 pt-24">

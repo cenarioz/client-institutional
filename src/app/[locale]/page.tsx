@@ -13,9 +13,7 @@ export default function Root() {
       <Nav />
       <Banner />
       <About />
-      <Divisor />
       <OurWork />
-      <Divisor />
       <Mission />
       <Footer />
     </main>

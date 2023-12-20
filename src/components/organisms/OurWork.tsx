@@ -68,7 +68,7 @@ const OurWork = (props: any) => {
   };
 
   return (
-    <section className="container mx-auto grid grid-cols-3 gap-4 py-12 xs:hidden">
+    <section className="container mx-auto grid grid-cols-3 gap-4 py-12 border-t border-b xs:hidden">
       <div className="col-span-2 flex flex-col items-center">
         <h1 className="text-4xl mb-12">{t("ourWork.title")}</h1>
         <div className="flex justify-center flex-wrap gap-6 content-center px-20">

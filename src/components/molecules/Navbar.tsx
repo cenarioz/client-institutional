@@ -881,7 +881,7 @@ export default function Nav({
           fill ? `text-gray-900` : "text-white"
         } bg-transparent relative z-10 w-full`}
       >
-        <div className="max-w-7xl mx-auto">
+        <div className="px-4 mx-auto container">
           <div className="flex items-center justify-between h-16">
             <div className="flex-shrink-0">
               <Link

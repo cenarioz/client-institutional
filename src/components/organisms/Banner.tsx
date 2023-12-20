@@ -9,12 +9,12 @@ const Banner = () => {
   const t = useTranslations();
   return (
     <>
-      <div className="relative -mt-16 bg-cover bg-center pt-24 pb-20" style={{ backgroundImage: `url('/banner.jpeg')` }}>
-        <div className="flex flex-col top-1/3 left-0 w-full items-center ">
-          <div className="flex container mx-auto px-4 text-white align-middle justify-center">
+      <div className="relative -mt-24 bg-cover bg-center pt-24 pb-20" style={{ backgroundImage: `url('/banner.jpeg')` }}>
+        <div className="flex flex-col top-1/2 left-0 w-full items-center ">
+          <div className="flex container mx-auto px-4 pt-12 text-white align-middle justify-center">
             <Search />
           </div>
-          <div className="container mx-auto px-4 pt-24">
+          <div className="container mx-auto px-4 md:pt-24 xs:pt-16">
             <p className="text-4xl w-80 font-bold text-white mb-4 pt-6 pb-6">
               {t("banner.message")}
             </p>

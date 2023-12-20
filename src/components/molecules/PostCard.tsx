@@ -89,7 +89,8 @@ function Card({
                   style={{
                     backgroundImage: `url(${image.path})`,
                     backgroundOrigin: "center",
-                    height: "240px",
+                    minHeight: "320px",
+                    maxHeight: "320px"
                   }}
                 ></div>
               );

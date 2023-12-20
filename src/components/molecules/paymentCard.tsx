@@ -9,6 +9,7 @@ import Button from "../atoms/Button";
 import DatePickerComponent from "../atoms/DatePicker";
 import Select from "../atoms/Select";
 import TimePickerComponent from "../atoms/TimePicker";
+import ButtonFull from "../atoms/ButtonFull";
 
 
 interface PaymentCardProps {
@@ -158,9 +159,9 @@ function PaymentCardComponent({
 
   const endHoursTime = selectedStartHour
     ? getFormattedDates(
-        generateDate(datee, "00:00:00"),
-        generateDate(datee, moment(selectedStartHour).format("HH:mm:ss"))
-      )
+      generateDate(datee, "00:00:00"),
+      generateDate(datee, moment(selectedStartHour).format("HH:mm:ss"))
+    )
     : [];
 
   bookings.forEach((booking) => {
@@ -291,9 +292,18 @@ function PaymentCardComponent({
         </div>
       )}
       <div className="mt-4">
-        <Button onClick={() => {}} full rounded="md">
-          {t('place.continue')}
-        </Button>
+        <ButtonFull
+          textColor={"text-white"}
+          bgColor="bg-violet-600"
+          rounded
+
+          type="reset"
+          isLoading={false}
+          value={t('place.continue')}
+        ></ButtonFull>
+        {/* <ButtonFull onClick={() => { }} full rounded="md">
+
+        </ButtonFull> */}
       </div>
       {totalSelectedHours != 0 && (
         <div>
@@ -309,7 +319,7 @@ function PaymentCardComponent({
             </p>
           </div>
           <div className="mt-2 flex justify-between">
-            <p className="text-sm w-full flex items-center gap-1 text-gray-800">{t('place.management_fee')} <IoInformationCircleOutline/></p>
+            <p className="text-sm w-full flex items-center gap-1 text-gray-800">{t('place.management_fee')} <IoInformationCircleOutline /></p>
             <p className="text-sm text-gray-800 text-right">
               {monetary(managementFee)}
             </p>

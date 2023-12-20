@@ -47,9 +47,7 @@ export default function Button({
   const defineColor = () => {
     const colorAndIntensity: any = color.split("-");
     if (colorAndIntensity.length > 1)
-      return tColors[colorAndIntensity[0]][
-        hover
-          ? Number(colorAndIntensity[1]) + 200
+      return tColors[colorAndIntensity[0]][hover ? Number(colorAndIntensity[1]) + 200
           : Number(colorAndIntensity[1])
       ];
     else return tColors[colorAndIntensity[0]];
@@ -60,7 +58,7 @@ export default function Button({
       return {};
     }
     if (!bordered || !light) {
-      return { background: defineColor() };
+      return { background: "#fff" };
     }
   };
 

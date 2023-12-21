@@ -330,7 +330,7 @@ function PaymentCardComponent({
           {monetary(selectedParticipants ?? place.details.price_pp_hourly_0)}/{" "}
           <small>{t(`enum.${place.value_type}`)}</small>
         </h1>
-        <button type="submit" className="bg-violet-600 rounded-md text-white py-3 px-12 relative">{t('place.check_availability')}</button>
+        <button type="submit" className="bg-violet-600 rounded-md text-white py-3 px-6 relative">{t('place.check_availability')}</button>
       </div>
     </>
 

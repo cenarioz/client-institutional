@@ -1,6 +1,6 @@
 "use client";
 import { IPlace } from "@/commons/@types/place";
-import React from "react";
+import React, { CSSProperties } from "react";
 import { BsHeart, BsShare } from "react-icons/bs";
 import Button from "../atoms/Button";
 import Modal from "../molecules/Modal";
@@ -10,7 +10,7 @@ function PostHeader({ place }: { place: IPlace }) {
   const [photosVisible, setPhotosVisible] = React.useState(false);
 
   const settings = {
-    showStatus: false,
+    showStatus: true,
     infiniteLoop: false,
     emulateTouch: true,
     showThumbs: false,
@@ -182,7 +182,7 @@ function PostHeader({ place }: { place: IPlace }) {
             </div>
 
             <div className="relative xs:h-72 h-60 md:hidden">
-              <Carousel {...settings}>
+              <Carousel showIndicators={false} statusFormatter={(current, total) => `${current} / ${total}`} {...settings}>
                 {place.images.map((image) => {
                   return (
                     <div
@@ -198,8 +198,6 @@ function PostHeader({ place }: { place: IPlace }) {
                         maxHeight: "288px"
                       }}
                     >
-
-
                     </div>
                   );
                 })}

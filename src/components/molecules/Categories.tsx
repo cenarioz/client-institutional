@@ -25,17 +25,17 @@ const MenuSlide = ({ props }: slideProps) => {
     );
   } else {
     return (
-      <div className="overflow-auto flex mb-6 flex-row justify-between w-ful gap-4 justify-items-center items-center border-t border-b py-1 pt-4 border-gray-200">
+      <div className="overflow-auto flex mb-6 flex-row justify-between justify-items-center items-center border-t border-b py-1 pt-4 border-gray-200">
         {props.map((item) => {
           return (
             <div key={Math.random()}>
               {item.disabled ? (
-                <div className="category flex flex-col items-center h-16 text-gray-400 hover:text-gray-400 pl-4 pr-4">
+                <div className="flex xs:w-32 flex-col items-center h-16 text-gray-400 hover:text-gray-400 pl-0 pr-0">
                   {item.icon}
                   <p className="text-sm font-base mt-1">{item.name}</p>
                 </div>
               ) : (
-                <div className="category flex flex-col items-center h-16 text-gray-900 hover:text-gray-900 hover:border-b-2 pl-4 pr-4 hover:border-gray-900">
+                <div className="flex xs:w-28 flex-col items-center h-16 text-gray-900 hover:text-gray-900 md:hover:border-b-2 pl-0 pr-0 hover:border-gray-900">
                   {item.icon}
                   <p className="text-sm font-base mt-1">{item.name}</p>
                 </div>

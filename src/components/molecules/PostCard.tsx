@@ -13,14 +13,14 @@ interface CardProps {
   type: string;
 }
 
-function multiFetcher(urls: string[]) {
-  return Promise.all(urls.map((url) => fetcher(url)));
-}
+// function multiFetcher(urls: string[]) {
+//   return Promise.all(urls.map((url) => fetcher(url)));
+// }
 
-const fetcher = (url: string) =>
-  fetch(url)
-    .then(async (r) => URL.createObjectURL(await r.blob()))
-    .catch(() => url);
+// const fetcher = (url: string) =>
+//   fetch(url)
+//     .then(async (r) => URL.createObjectURL(await r.blob()))
+//     .catch(() => url);
 
 export const CardLoading = () => {
   return (
@@ -52,7 +52,7 @@ function Card({
   images,
 }: CardProps) {
   const [isLoading, setIsLoading] = useState(true);
-
+  // console.log(images)
   const settings = {
     showStatus: false,
     infiniteLoop: false,
@@ -64,39 +64,40 @@ function Card({
     dynamicHeight: false,
   };
 
-  useEffect(() => {
-    const urls = images.map((image) => image.path);
-    multiFetcher(urls)
-      .then(() => setIsLoading(false))
-      .catch((error) => console.error(error));
-  }, [images]);
+  // useEffect(() => {
+  //   const urls = images.map((image) => image.path);
+  //   multiFetcher(urls)
+  //     .then(() => setIsLoading(false))
+  //     .catch((error) => console.error(error));
+  // }, [images]);
 
   const t = useTranslations();
 
   return (
     <div className="rounded overflow-hidden cursor-pointer">
       <div className="relative xs:h-80 h-60">
-        {isLoading ? (
+        {/* {isLoading ? (
           <div className="relative xs:h-80 h-60 bg-gray-300 rounded-xl"></div>
-        ) : (
-          <Carousel {...settings}>
-            {images.map((image) => {
-              return (
-                <div
-                  onClick={onClick}
-                  key={image.path}
-                  className="bg-cover w-full"
-                  style={{
-                    backgroundImage: `url(${image.path})`,
-                    backgroundOrigin: "center",
-                    minHeight: "320px",
-                    maxHeight: "320px"
-                  }}
-                ></div>
-              );
-            })}
-          </Carousel>
-        )}
+        ) : ( */}
+        <Carousel {...settings}>
+          {images.map((image) => {
+            // console.log(image)
+            return (
+              <div
+                onClick={onClick}
+                key={image.path}
+                className="bg-cover w-full"
+                style={{
+                  backgroundImage: `url(${image.path})`,
+                  backgroundOrigin: "center",
+                  minHeight: "320px",
+                  maxHeight: "320px"
+                }}
+              ></div>
+            );
+          })}
+        </Carousel>
+        {/* )} */}
       </div>
       <div className="py-4" onClick={onClick}>
         <div className="flex flex-row justify-between gap-2">

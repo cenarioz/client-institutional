@@ -196,7 +196,7 @@ function PostBody({ place }: PostBodyProps) {
 
   return (
     <div className="md:flex py-16">
-      <div className="container pr-6">
+      <div className="container md:pr-6">
         <h1 className="text-xl font-medium mb-5">{t("place.information")}</h1>
         <Categories props={info} />
         <h1 className="text-xl font-medium mb-5">{t("place.description")}</h1>

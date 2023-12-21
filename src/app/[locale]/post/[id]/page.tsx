@@ -3,6 +3,7 @@
 import { IDataPlace } from "@/commons/@types/place";
 import Divisor from "@/components/atoms/Divisor";
 import Nav from "@/components/molecules/Navbar";
+import { CardLoading } from "@/components/molecules/PostCard";
 import PostBody from "@/components/organisms/PostBody";
 import PostHeader from "@/components/organisms/PostHeader";
 import { fetcher } from "@/utils/place.api";
@@ -113,7 +114,7 @@ export default function Post() {
                 </div>
               </div>
             </div>
-            <div className="w-full flex flex-row h-[500px] gap-1 rounded-lg overflow-hidden">
+            <div className="w-full flex flex-row h-[500px] xs:hidden gap-1 rounded-lg overflow-hidden">
               <div className="relative w-full">
                 <div className="bg-black w-full h-full absolute opacity-0 hover:opacity-20"></div>
                 <div className="bg-gray-200 w-full h-full"></div>
@@ -135,14 +136,15 @@ export default function Post() {
                 </div>
               </div>
             </div>
+            <div className="relative xs:h-80 md:hidden h-60 bg-gray-300 rounded-xl"></div>
           </div>
           <div className="flex py-16 skeleton-box">
-            <div className="w-2/3 skeleton-box">
+            <div className="container md:pr-6 skeleton-box">
               <h1 className="text-xl font-medium mb-5 skeleton-box">
                 Informações
               </h1>
 
-              <div className="flex mb-6 flex-row justify-between w-full gap-4 justify-items-center items-center border-t border-b py-1 pt-4 border-gray-200">
+              <div className="overflow-auto flex mb-6 flex-row justify-between w-full gap-4 justify-items-center items-center border-t border-b py-1 pt-4 border-gray-200">
                 <div key={Math.random()}>
                   <div className="category flex flex-col items-center h-16 pl-4 pr-4">
                     {/* Skeleton Loading for Icon */}
@@ -204,7 +206,7 @@ export default function Post() {
 
               <Divisor></Divisor>
             </div>
-            <div className="ml-[8.333333333333332%] w-1/3 skeleton-box shadow-lg">
+            <div className="ml-[8.333333333333332%] w-1/3 skeleton-box xs:hidden shadow-lg">
               <div className="w-full h-fit bg-white rounded-lg border-gray-200 top-20 border sticky p-6">
                 <div className="h-6 bg-gray-300 mb-2 rounded w-1/2 mx-auto"></div>
 
@@ -239,7 +241,8 @@ export default function Post() {
     );
   } else if (placeError || bookingError) {
     return <>Error</>;
-  } else {
+  }
+  else {
     const place = { ...placeData.place, ...bookingData.place };
 
     return (

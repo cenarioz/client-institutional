@@ -124,6 +124,9 @@
     "production": "Production",
     "event": "Event",
     "meeting": "Meeting",
-    "closed": "Closed"
+    "closed": "Closed",
+    "host_rating": "Rating",
+    "response_time": "Response time",
+    "check_availability": "Check availability"
   }
 }

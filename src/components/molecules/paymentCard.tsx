@@ -236,103 +236,103 @@ function PaymentCardComponent({
   };
 
   return (
-    <div className="w-full h-fit bg-white rounded-lg border-gray-200 top-20 border sticky p-6">
-      <h1 className="text-lg text-center">
-        {monetary(selectedParticipants ?? place.details.price_pp_hourly_0)}/{" "}
-        {t(`enum.${place.value_type}`)}
-      </h1>
-      {place.minimum && (
-        <h2 className="text-xs text-gray-500 mb-2 text-center">
-          {place.minimum > 1
-            ? `${place.minimum} ${t("place.minimums")}`
-            : `${place.minimum} ${t("place.minimum")}`}
-        </h2>
-      )}
+    <>
+      <div className="w-full h-fit bg-white rounded-lg border-gray-200 top-20 border md:sticky p-6 shadow-lg xs:hidden">
+        <h1 className="text-lg text-center">
+          {monetary(selectedParticipants ?? place.details.price_pp_hourly_0)}/{" "}
+          {t(`enum.${place.value_type}`)}
+        </h1>
+        {place.minimum && (
+          <h2 className="text-xs text-gray-500 mb-2 text-center">
+            {place.minimum > 1
+              ? `${place.minimum} ${t("place.minimums")}`
+              : `${place.minimum} ${t("place.minimum")}`}
+          </h2>
+        )}
 
-      <div className="mb-4">
-        <DatePickerComponent
-          bookings={bookings}
-          openingHours={openingHours}
-          selectedDate={selectedDate}
-          onChange={handleDateSelect}
-          label={t("place.date_hour")}
-          onMonthChange={handleSelectedMonth}
-          excludeDates={blockedDays}
-        />
-      </div>
-      <div className="flex mb-2 gap-1">
-        <TimePickerComponent
-          bookings={bookings}
-          selectedTime={selectedStartHour}
-          excludedDays={removeHoursFromStartHour}
-          openingHours={openingHours}
-          placeholder={t("place.initial_hour")}
-          onChange={handleStartHourSelect}
-          disabled={!selectedDate}
-        />
-        <TimePickerComponent
-          bookings={bookings}
-          selectedTime={selectedEndHour}
-          excludedDays={removeHoursFromEndHour}
-          openingHours={openingHours}
-          placeholder={t("place.final_hour")}
-          onChange={handleEndHourSelect}
-          disabled={!selectedStartHour}
-        />
-      </div>
-      <div className="flex justify-end w-full text-xs text-gray-500">
-        <p>
-          {t("place.total_hours")}: {totalSelectedHours}
-        </p>
-      </div>
-
-      {!disableCrew && (
         <div className="mb-4">
-          <Select label={t("place.crew")} onChange={handleSelectParticipants} details={place.details} />
+          <DatePickerComponent
+            bookings={bookings}
+            openingHours={openingHours}
+            selectedDate={selectedDate}
+            onChange={handleDateSelect}
+            label={t("place.date_hour")}
+            onMonthChange={handleSelectedMonth}
+            excludeDates={blockedDays}
+          />
         </div>
-      )}
-      <div className="mt-4">
-        <ButtonFull
-          textColor={"text-white"}
-          bgColor="bg-violet-600"
-          rounded
-
-          type="reset"
-          isLoading={false}
-          value={t('place.continue')}
-        ></ButtonFull>
-        {/* <ButtonFull onClick={() => { }} full rounded="md">
-
-        </ButtonFull> */}
-      </div>
-      {totalSelectedHours != 0 && (
-        <div>
-          <div className="mt-4 pt-2 flex justify-between">
-            <p className="text-sm text-gray-800">
-              {monetary(selectedParticipants ?? place.details.price_pp_hourly_0)} x{" "}
-              {totalSelectedHours > 1
-                ? `${totalSelectedHours} ${t('place.hours')}`
-                : `${totalSelectedHours} ${t('place.hour')}`}
-            </p>
-            <p className="text-sm text-gray-800 text-right">
-              {monetary(totalPrice)}
-            </p>
-          </div>
-          <div className="mt-2 flex justify-between">
-            <p className="text-sm w-full flex items-center gap-1 text-gray-800">{t('place.management_fee')} <IoInformationCircleOutline /></p>
-            <p className="text-sm text-gray-800 text-right">
-              {monetary(managementFee)}
-            </p>
-          </div>
+        <div className="flex mb-2 gap-1">
+          <TimePickerComponent
+            bookings={bookings}
+            selectedTime={selectedStartHour}
+            excludedDays={removeHoursFromStartHour}
+            openingHours={openingHours}
+            placeholder={t("place.initial_hour")}
+            onChange={handleStartHourSelect}
+            disabled={!selectedDate}
+          />
+          <TimePickerComponent
+            bookings={bookings}
+            selectedTime={selectedEndHour}
+            excludedDays={removeHoursFromEndHour}
+            openingHours={openingHours}
+            placeholder={t("place.final_hour")}
+            onChange={handleEndHourSelect}
+            disabled={!selectedStartHour}
+          />
         </div>
-      )}
+        <div className="flex justify-end w-full text-xs text-gray-500">
+          <p>
+            {t("place.total_hours")}: {totalSelectedHours}
+          </p>
+        </div>
 
-      <div className="mt-4 border-t border-gray-300 pt-2 flex justify-between">
-        <p className="text-lg text-gray-900">{t('place.total_with_tax')}</p>
-        <p className="text-lg font-bold text-gray-900 text-right">
-          {monetary(totalWithTax)}
-        </p>
+        {!disableCrew && (
+          <div className="mb-4">
+            <Select label={t("place.crew")} onChange={handleSelectParticipants} details={place.details} />
+          </div>
+        )}
+        <div className="mt-4">
+          <button type="submit" className="bg-violet-600 rounded-md w-full text-white py-3 px-12 relative">{t('place.continue')}</button>
+        </div>
+        {totalSelectedHours != 0 && (
+          <div>
+            <div className="mt-4 pt-2 flex justify-between">
+              <p className="text-sm text-gray-800">
+                {monetary(selectedParticipants ?? place.details.price_pp_hourly_0)} x{" "}
+                {totalSelectedHours > 1
+                  ? `${totalSelectedHours} ${t('place.hours')}`
+                  : `${totalSelectedHours} ${t('place.hour')}`}
+              </p>
+              <p className="text-sm text-gray-800 text-right">
+                {monetary(totalPrice)}
+              </p>
+            </div>
+            <div className="mt-2 flex justify-between">
+              <p className="text-sm w-full flex items-center gap-1 text-gray-800">{t('place.management_fee')} <IoInformationCircleOutline /></p>
+              <p className="text-sm text-gray-800 text-right">
+                {monetary(managementFee)}
+              </p>
+            </div>
+          </div>
+        )}
+
+        <div className="mt-4 border-t border-gray-300 pt-2 flex justify-between">
+          <p className="text-lg text-gray-900">{t('place.total_with_tax')}</p>
+          <p className="text-lg font-bold text-gray-900 text-right">
+            {monetary(totalWithTax)}
+          </p>
+        </div>
       </div>
-    </div>
+      <div className="w-full fixed flex justify-between  items-center h-fit bg-white border-gray-200 bottom-0 border left-0 right-0  p-4 shadow-lg md:hidden">
+
+        <h1 className="text-md text-center">
+          {monetary(selectedParticipants ?? place.details.price_pp_hourly_0)}/{" "}
+          <small>{t(`enum.${place.value_type}`)}</small>
+        </h1>
+        <button type="submit" className="bg-violet-600 rounded-md text-white py-3 px-12 relative">{t('place.check_availability')}</button>
+      </div>
+    </>
+
   );
 }

@@ -7,7 +7,7 @@ interface slideProps {
 const MenuSlide = ({ props }: slideProps) => {
   if (!props) {
     return (
-      <div className="flex mb-6 flex-row justify-between w-full gap-4 justify-items-center items-center border-t border-b py-1 pt-4 border-gray-200">
+      <div className="overflow-auto flex mb-6 flex-row justify-between w-full gap-4 justify-items-center items-center border-t border-b py-1 pt-4 border-gray-200">
         {Array(6).map((item) => {
           return (
             <div key={Math.random()}>
@@ -25,7 +25,7 @@ const MenuSlide = ({ props }: slideProps) => {
     );
   } else {
     return (
-      <div className="flex mb-6 flex-row justify-between w-ful gap-4 justify-items-center items-center border-t border-b py-1 pt-4 border-gray-200">
+      <div className="overflow-auto flex mb-6 flex-row justify-between w-ful gap-4 justify-items-center items-center border-t border-b py-1 pt-4 border-gray-200">
         {props.map((item) => {
           return (
             <div key={Math.random()}>

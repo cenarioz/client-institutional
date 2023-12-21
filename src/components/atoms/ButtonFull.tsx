@@ -8,6 +8,7 @@ interface ButtonProps {
   bgColor?: string;
   textColor?: string;
   onClick?: any;
+  full?: boolean
 }
 
 export default function ButtonFull({
@@ -17,6 +18,7 @@ export default function ButtonFull({
   onClick,
   textColor,
   rounded,
+  full,
   type = "submit",
 }: ButtonProps) {
   const dotStyles = (i: number) => {
@@ -33,6 +35,7 @@ export default function ButtonFull({
         !isLoading ? (bgColor ? bgColor : "bg-violet-600") : "bg-gray-300"
       } 
       ${rounded ? "rounded-full" : "rounded-md"} 
+      ${full ? "w-full" : ""} 
       ${textColor ? textColor : "text-white"} 
       py-3 px-12 mb-4 relative`}
     >

@@ -26,7 +26,7 @@ function PostBody({ place }: PostBodyProps) {
 
   const placeSizes = [
     place.details?.size &&
-      `Tamanho da propriedade (metros quadrados): ${place.details.size} M²`,
+    `Tamanho da propriedade (metros quadrados): ${place.details.size} M²`,
     place.details?.height && `Altura: ${place.details?.height} M`,
     place.details?.width && `Largura: ${place.details?.width} M`,
     place.details?.length && `Comprimento: ${place.details?.length} M`,
@@ -130,9 +130,8 @@ function PostBody({ place }: PostBodyProps) {
             return (
               <div
                 key={Math.random()}
-                className={`${
-                  !openHour?.active && "text-gray-500"
-                } flex justify-between`}
+                className={`${!openHour?.active && "text-gray-500"
+                  } flex justify-between`}
               >
                 <div>{t(`enum.day_week.${openHour?.day_of_week}`)}</div>
                 <div>
@@ -159,20 +158,18 @@ function PostBody({ place }: PostBodyProps) {
   const info = [
     {
       icon: <IoTimeOutline />,
-      name: `${
-        place?.minimum > 1
+      name: `${place?.minimum > 1
           ? `${place?.minimum} ${t("place.hours")}`
           : `1 ${t("place.hour")}`
-      }`,
+        }`,
       disabled: !place?.minimum,
     },
     {
       icon: <IoPeopleOutline />,
-      name: `${
-        place?.details?.max_attendees > 1
+      name: `${place?.details?.max_attendees > 1
           ? `${place?.details?.max_attendees} ${t("place.persons")}`
           : `1 ${t("place.person")}`
-      }`,
+        }`,
       disabled: !place?.details?.max_attendees,
     },
     {
@@ -198,8 +195,8 @@ function PostBody({ place }: PostBodyProps) {
   ];
 
   return (
-    <div className="flex py-16">
-      <div className="w-2/3">
+    <div className="md:flex py-16">
+      <div className="container pr-6">
         <h1 className="text-xl font-medium mb-5">{t("place.information")}</h1>
         <Categories props={info} />
         <h1 className="text-xl font-medium mb-5">{t("place.description")}</h1>
@@ -255,7 +252,7 @@ function PostBody({ place }: PostBodyProps) {
         </div>
         <Divisor></Divisor>
       </div>
-      <div className="ml-[8.333333333333332%] w-1/3">
+      <div className="">
         <PaymentCard
           openingHours={place.opening_hours}
           bookings={place.bookings}

@@ -5,11 +5,10 @@ import { useEffect, useState } from "react";
 import {
   IoInformationCircleOutline
 } from "react-icons/io5";
-import Button from "../atoms/Button";
 import DatePickerComponent from "../atoms/DatePicker";
 import Select from "../atoms/Select";
 import TimePickerComponent from "../atoms/TimePicker";
-import ButtonFull from "../atoms/ButtonFull";
+import Modal from "./Modal";
 
 
 interface PaymentCardProps {
@@ -124,6 +123,8 @@ function PaymentCardComponent({
 }: PaymentCardProps) {
   const t = useTranslations();
 
+  const [checkInModal, setCheckInModal] = useState<boolean>(false)
+
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedParticipants, setSelectedParticipants] = useState<any>(null);
   const [selectedStartHour, setSelectedStartHour] = useState<Date | null>(null);
@@ -237,6 +238,112 @@ function PaymentCardComponent({
 
   return (
     <>
+
+      <Modal isOpen={checkInModal} onClose={function (): void {
+        setCheckInModal(false)
+      }} title={""}>
+        <div className="w-full h-fit bg-white pt-3">
+
+
+
+          <div className="mb-4">
+            <DatePickerComponent
+              bookings={bookings}
+              openingHours={openingHours}
+              selectedDate={selectedDate}
+              onChange={handleDateSelect}
+              label={t("place.date_hour")}
+              onMonthChange={handleSelectedMonth}
+              excludeDates={blockedDays}
+            />
+          </div>
+          <div className="flex mb-2 gap-1">
+            <TimePickerComponent
+              bookings={bookings}
+              selectedTime={selectedStartHour}
+              excludedDays={removeHoursFromStartHour}
+              openingHours={openingHours}
+              placeholder={t("place.initial_hour")}
+              onChange={handleStartHourSelect}
+              disabled={!selectedDate}
+            />
+            <TimePickerComponent
+              bookings={bookings}
+              selectedTime={selectedEndHour}
+              excludedDays={removeHoursFromEndHour}
+              openingHours={openingHours}
+              placeholder={t("place.final_hour")}
+              onChange={handleEndHourSelect}
+              disabled={!selectedStartHour}
+            />
+          </div>
+          <div className="flex justify-between w-full text-xs text-gray-500">
+            {place.minimum ? (
+              <h2 className="text-xs text-gray-500 mb-2 text-center">
+                {place.minimum > 1
+                  ? `${place.minimum} ${t("place.minimums")}`
+                  : `${place.minimum} ${t("place.minimum")}`}
+              </h2>
+            ) : (<h2></h2>)}
+            <p>
+              {t("place.total_hours")}: {totalSelectedHours}
+            </p>
+          </div>
+
+          {!disableCrew && (
+            <div className="mb-4 pt-4">
+              <Select label={t("place.crew")} onChange={handleSelectParticipants} selectedValue={selectedParticipants} details={place.details} />
+            </div>
+          )}
+
+          {totalSelectedHours != 0 && (
+            <div>
+              <div className="mt-4 pt-2 flex justify-between">
+                <p className="text-sm text-gray-800">
+                  {monetary(selectedParticipants ?? place.details.price_pp_hourly_0)} x{" "}
+                  {totalSelectedHours > 1
+                    ? `${totalSelectedHours} ${t('place.hours')}`
+                    : `${totalSelectedHours} ${t('place.hour')}`}
+                </p>
+                <p className="text-sm text-gray-800 text-right">
+                  {monetary(totalPrice)}
+                </p>
+              </div>
+              <div className="mt-2 flex justify-between">
+                <p className="text-sm w-full flex items-center gap-1 text-gray-800">{t('place.management_fee')} <IoInformationCircleOutline /></p>
+                <p className="text-sm text-gray-800 text-right">
+                  {monetary(managementFee)}
+                </p>
+              </div>
+            </div>
+          )}
+
+          <div className="w-full fixed flex justify-between items-center h-fit bg-white border-gray-200 bottom-0 border left-0 right-0  p-4 shadow-lg md:hidden">
+            <h1 className="text-md text-center">
+
+
+              {totalWithTax > 0 ? (
+                <div className="flex items-baseline">
+
+                  <h1 className="font-medium text-gray-900">{monetary(totalWithTax)}/</h1>
+                  <small>{t(`place.total_with_tax`)}</small>
+                </div>
+              ) :
+                (
+                  <div className="flex items-baseline">
+                    <h1 className="font-medium text-gray-900">{monetary(selectedParticipants ?? place.details.price_pp_hourly_0)}/</h1>
+                    <small>{t(`enum.${place.value_type}`)}</small>
+                  </div>
+                )}
+            </h1>
+            <button onClick={() => setCheckInModal(false)} type="submit" className=" bg-violet-600 rounded-md text-white py-3 px-6 disabled:bg-zinc-200 relative" disabled={totalWithTax === 0 || !selectedParticipants}>{t('place.save')}</button>
+
+          </div>
+        </div>
+
+      </Modal>
+
+
       <div className="w-full h-fit bg-white rounded-lg border-gray-200 top-20 border md:sticky p-6 shadow-lg xs:hidden">
         <h1 className="text-lg text-center">
           {monetary(selectedParticipants ?? place.details.price_pp_hourly_0)}/{" "}
@@ -289,7 +396,7 @@ function PaymentCardComponent({
 
         {!disableCrew && (
           <div className="mb-4">
-            <Select label={t("place.crew")} onChange={handleSelectParticipants} details={place.details} />
+            <Select label={t("place.crew")} onChange={handleSelectParticipants} selectedValue={selectedParticipants} details={place.details} />
           </div>
         )}
         <div className="mt-4">
@@ -324,15 +431,32 @@ function PaymentCardComponent({
           </p>
         </div>
       </div>
-      <div className="w-full fixed flex justify-between  items-center h-fit bg-white border-gray-200 bottom-0 border left-0 right-0  p-4 shadow-lg md:hidden">
+      <div className="w-full fixed flex justify-between items-center h-fit bg-white border-gray-200 bottom-0 border left-0 right-0  p-4 shadow-lg md:hidden">
+        {totalWithTax > 0 ? (
+          <a href="#" onClick={() => setCheckInModal(true)} className="underline">
+            <div className="flex items-baseline">
 
-        <h1 className="text-md text-center">
-          {monetary(selectedParticipants ?? place.details.price_pp_hourly_0)}/{" "}
-          <small>{t(`enum.${place.value_type}`)}</small>
-        </h1>
-        <button type="submit" className="bg-violet-600 rounded-md text-white py-3 px-6 relative">{t('place.check_availability')}</button>
+              <h1 className="font-medium text-gray-900">{monetary(totalWithTax)}/</h1>
+              <small>{t(`place.total_with_tax`)}</small>
+            </div>
+          </a>
+        ) :
+          (
+            <div className="flex items-baseline">
+              <h1 className="font-medium text-gray-900">{monetary(selectedParticipants ?? place.details.price_pp_hourly_0)}/</h1>
+              <small>{t(`enum.${place.value_type}`)}</small>
+            </div>
+
+          )}
+
+        {totalWithTax === 0 || !selectedParticipants ?
+          <button onClick={() => setCheckInModal(true)} type="submit" className=" bg-violet-600  rounded-md text-white py-3 px-6 relative">{t('place.check_availability')}</button>
+          :
+          <button onClick={() => setCheckInModal(true)} type="submit"
+            className=" bg-violet-600 rounded-md text-white py-3 px-6 disabled:bg-zinc-200 relative"
+          >Reservar</button>
+        }
       </div>
     </>
-
   );
 }

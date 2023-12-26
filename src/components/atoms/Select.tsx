@@ -6,9 +6,10 @@ interface SelectProps {
   label?: string;
   details: IDetails;
   onChange: (data: any) => void;
+  selectedValue: any
 }
 
-const Select = ({ label, details, onChange }: SelectProps) => {
+const Select = ({ label, details, onChange, selectedValue }: SelectProps) => {
   const t = useTranslations();
   const handleChange = (selectedOption: any) => {
     onChange(selectedOption.value);
@@ -55,6 +56,7 @@ const Select = ({ label, details, onChange }: SelectProps) => {
         onChange={handleChange}
         placeholder={t("place.select_one_option")}
         isOptionDisabled={(option) => option.disabled}
+        value={selectedValue && options.find((option) => option.value === selectedValue)}
       />
     </>
   );

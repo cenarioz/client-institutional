@@ -127,6 +127,7 @@
     "closed": "Closed",
     "host_rating": "Rating",
     "response_time": "Response time",
-    "check_availability": "Check availability"
+    "check_availability": "Check availability",
+    "save": "Save"
   }
 }
